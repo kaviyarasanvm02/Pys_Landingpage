@@ -11,7 +11,7 @@ const Proposals = () => {
   }, []);
 
   return (
-    <Container maxWidth='xl' sx={{paddingBottom: 12}}>
+    <Container maxWidth='xl' >
       <Grid container spacing={3} sx={{ justifyContent: "space-evenly" }}>
         {/* Header Section */}
         <Grid item xs={12}>
