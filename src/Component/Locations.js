@@ -2,20 +2,12 @@ import React, { useEffect } from "react";
 import { Box, Grid, Typography, Button, Container } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
-<<<<<<< Updated upstream
 import chennai from "../assests/locations/chennai.png";
 import Coiambatore from "../assests/locations/Coiambatore.png";
 import Madurai from "../assests/locations/Madurai.png";
 import Tirunelveli from "../assests/locations/Tirunelveli.png";
 import Trichy from "../assests/locations/Trichy.png";
 import pondicherry from "../assests/locations/pondicherry.png";
-=======
-import chennai from "../assests/locations/chennai.png"
-import Coiambatore from "../assests/locations/Coiambatore.png"
-import Madurai from "../assests/locations/chennai.png"
-import Tirunelveli from "../assests/locations/chennai.png"
-import Tiruchirappalli from "../assests/locations/chennai.png"
->>>>>>> Stashed changes
 
 const locations = [
   {
