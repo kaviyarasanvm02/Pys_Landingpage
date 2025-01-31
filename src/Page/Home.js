@@ -9,6 +9,7 @@ import {
   Container,
   Grid,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import logo from "../assests/logo.png";
 import banner from "../assests/banner.svg";
@@ -17,6 +18,8 @@ import Offer from "../Component/Offer";
 import Proposals from "../Component/Proposals";
 import PYSPartners from "../Component/PYSPartners";
 import Locations from "../Component/Locations";
+import Footer from "../Component/Footer";
+
 
 const Home = () => {
   return (
@@ -33,7 +36,7 @@ const Home = () => {
           <Button color="inherit" href="listing-grid.html">
             Venue
           </Button>
-          <Button color="inherit" href="about.html">
+          <Button color="inherit" component={Link} to="/about">
             About Us
           </Button>
           <Button color="inherit" href="blog-grid-sidebar.html">
@@ -218,6 +221,7 @@ const Home = () => {
         <Proposals />
         <PYSPartners />
         <Locations />
+        <Footer />
       </Box>
     </div>
   );
