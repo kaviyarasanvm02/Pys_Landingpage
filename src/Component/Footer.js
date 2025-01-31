@@ -195,7 +195,7 @@ const Footer = () => {
             },
           }}
         >
-          Free Reward
+          Free Reward 🏆
         </Button>
       </Box>
       <Dialog
