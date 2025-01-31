@@ -39,6 +39,7 @@ const Offer = () => {
           zIndex: 0,
           transitionTimingFunction: "ease-out",
           animation: "drive 2s forwards",
+          display: {xs: "none", md: "block"}
         }}
       >
         <img src={shapesRound} alt="Decoration" style={{ width: "400px" }} />
@@ -54,15 +55,17 @@ const Offer = () => {
           zIndex: 0,
           transitionTimingFunction: "ease-out",
           animation: "drive 2s forwards",
+          display: {xs: "none", md: "block"}
+
         }}
       >
         <img src={shapesRound} alt="Decoration" style={{ width: "350px" }} />
       </Box>
-      <Container maxWidth="xl">
+      <Container maxWidth="xl" sx={{mt: 8}}>
         <Grid container sx={{ justifyContent: "center" }}>
           <Grid item xs={12}>
             <Typography
-              sx={{ fontSize: "3rem", color: "#fff", fontWeight: "bold" }}
+              sx={{fontSize: {xs: "1.8rem", md: "3rem" }, color: "#fff", fontWeight: "bold", textAlign: "center" }}
             >
               What we offer
             </Typography>
@@ -79,7 +82,7 @@ const Offer = () => {
             xs={12}
             sm={6}
             lg={2.8}
-            sx={{ marginTop: 4, marginBottom: 7 }}
+            sx={{  marginTop: {xs: 0, md: 4}, marginBottom: {xs: 0, md: 7} }}
           >
             <Box
               display="flex"
@@ -116,7 +119,7 @@ const Offer = () => {
             xs={12}
             sm={6}
             lg={2.8}
-            sx={{ marginTop: 4, marginBottom: 7 }}
+            sx={{ marginTop: {xs: 0, md: 4}, marginBottom: {xs: 0, md: 7} }}
           >
             <Box
               display="flex"
@@ -152,7 +155,7 @@ const Offer = () => {
             xs={12}
             sm={6}
             lg={2.8}
-            sx={{ marginTop: 4, marginBottom: 7 }}
+            sx={{ marginTop: {xs: 0, md: 4}, marginBottom: {xs: 0, md: 7} }}
           >
             <Box
               display="flex"
@@ -188,7 +191,7 @@ const Offer = () => {
             xs={12}
             sm={6}
             lg={2.8}
-            sx={{ marginTop: 4, marginBottom: 7 }}
+            sx={{ marginTop: {xs: 0, md: 4}, marginBottom: {xs: 0, md: 7} }}
           >
             <Box
               display="flex"

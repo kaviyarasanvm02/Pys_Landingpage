@@ -9,9 +9,6 @@ import {
   Container,
   Grid,
 } from "@mui/material";
-import { Link } from "react-router-dom";
-import MenuIcon from "@mui/icons-material/Menu";
-import logo from "../assests/logo.png";
 import banner from "../assests/banner.svg";
 import shapesRound from "../assests/shapes-round.png";
 import Offer from "../Component/Offer";
@@ -19,42 +16,21 @@ import Proposals from "../Component/Proposals";
 import PYSPartners from "../Component/PYSPartners";
 import Locations from "../Component/Locations";
 import Footer from "../Component/Footer";
+import NavBar from "../Component/NavBar";
+import Categories from "../Component/Categories ";
+import HomePageBlog from "../Component/HomePageBlog";
 
 
 const Home = () => {
   return (
     <div>
       {/* Header */}
-      <AppBar position="static" color="transparent" elevation={0}>
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <img src={logo} alt="Logo" style={{ height: "40px" }} />
-          </Typography>
-          <Button color="inherit" href="listing-grid.html">
-            Venue
-          </Button>
-          <Button color="inherit" component={Link} to="/about">
-            About Us
-          </Button>
-          <Button color="inherit" href="blog-grid-sidebar.html">
-            Blog
-          </Button>
-          <Button color="inherit" href="contact.html">
-            Contact
-          </Button>
-          <Button color="inherit" href="login.html">
-            Sign In
-          </Button>
-        </Toolbar>
-      </AppBar>
+      <NavBar />
 
-      {/* Banner Section */}
       <Box
         sx={{
           backgroundColor: "#111018",
+          paddingTop: {xs: 10, md: 1}
         }}
       >
         <Box
@@ -134,7 +110,7 @@ const Home = () => {
                     variant="h3"
                     gutterBottom
                     sx={{
-                      fontSize: "3.3rem",
+                      fontSize: {xs: "1.8rem", md: "2.3rem", lg: "3.3rem" },
                       fontWeight: "bold",
                       fontFamily: "Poppins, sans-serif",
                       color: "#ffffff",
@@ -144,11 +120,11 @@ const Home = () => {
                     Let us help you Find, Book the Easiest Way
                   </Typography>
                   <Typography
-                    variant="body1"
+                    variant="h3"
                     gutterBottom
                     sx={{
+                      fontSize: {xs: "1.2rem",md: "1.3rem", lg: "1.5rem" },
                       marginTop: 3.3,
-                      fontSize: "1.5rem",
                       color: "#ffffff",
                       animation: "slideDown  1s ease-out forwards",
                       // animationDelay: "0.2s",
@@ -158,11 +134,11 @@ const Home = () => {
                     platform, taking your business to global customers.
                   </Typography>
                   <Typography
-                    variant="body1"
+                    variant="h3"
                     gutterBottom
                     sx={{
                       marginTop: 3.3,
-                      fontSize: "1.5rem",
+                      fontSize: {xs: "1.2rem",md: "1.3rem", lg: "1.5rem" },
                       color: "#ffffff",
                       animation: "slideDown  1s ease-out forwards",
                       // animationDelay: "0.4s",
@@ -172,11 +148,11 @@ const Home = () => {
                     schedules, and engage with clients.
                   </Typography>
                   <Typography
-                    variant="body1"
+                    variant="h3"
                     gutterBottom
                     sx={{
                       marginTop: 3.3,
-                      fontSize: "1.5rem",
+                      fontSize: {xs: "1.2rem",md: "1.3rem", lg: "1.5rem" },
                       color: "#ffffff",
                       animation: "slideDown  1s ease-out forwards",
                       // animationDelay: "0.6s",
@@ -186,7 +162,7 @@ const Home = () => {
                   </Typography>
                 </Box>
               </Grid>
-              <Grid item xs={12} md={5}>
+              <Grid item xs={12} md={5} sx={{display: {xs: "none", md: "block"}}}>
                 <style>
                   {`
                     @keyframes slideIn {
@@ -217,10 +193,12 @@ const Home = () => {
             </Grid>
           </Container>
         </Box>
+        {/* <Categories /> */}
         <Offer />
         <Proposals />
         <PYSPartners />
         <Locations />
+        <HomePageBlog />
         <Footer />
       </Box>
     </div>
