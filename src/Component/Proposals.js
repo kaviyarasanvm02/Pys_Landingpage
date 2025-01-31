@@ -11,7 +11,7 @@ const Proposals = () => {
   }, []);
 
   return (
-    <Container maxWidth='xl' >
+    <Container maxWidth='xl' sx={{mt: 8}}>
       <Grid container spacing={3} sx={{ justifyContent: "space-evenly" }}>
         {/* Header Section */}
         <Grid item xs={12}>
@@ -21,7 +21,7 @@ const Proposals = () => {
             data-aos="fade-up"
           >
             <Typography
-              sx={{ fontSize: "3rem", color: "#fff", fontWeight: "bold" }}
+              sx={{ fontSize: {xs: "1.8rem", md: "3rem" }, color: "#fff", fontWeight: "bold" }}
             >
               Our proposals for business partners
             </Typography>
@@ -39,12 +39,12 @@ const Proposals = () => {
           data-aos-delay="200"
         >
           <Grid container sx={{ justifyContent: "space-between" }}>
-            <Grid item xs={12} md={1.5} className="listee-premium-img">
+            <Grid item xs={1.5} md={1.5} className="listee-premium-img">
               <span>
                 <img src={tick} alt="img" style={{ width: "100%" }} />
               </span>
             </Grid>
-            <Grid item xs={12} md={10} className="listee-premium-content">
+            <Grid item xs={10} md={10} className="listee-premium-content">
               <Typography sx={{ color: "#ffff", textAlign: "start" }}>
                 In 7 minutes, we will have your business online. Move your shop
                 to the cloud and manage from anywhere.
@@ -63,12 +63,12 @@ const Proposals = () => {
           data-aos-delay="400"
         >
           <Grid container sx={{ justifyContent: "space-between" }}>
-            <Grid item xs={12} md={1.5} className="listee-premium-img">
+            <Grid item xs={1.5} md={1.5} className="listee-premium-img">
               <span>
                 <img src={tick} alt="img" style={{ width: "100%" }} />
               </span>
             </Grid>
-            <Grid item xs={12} md={10} className="listee-premium-content">
+            <Grid item xs={10} md={10} className="listee-premium-content">
               <Typography sx={{ color: "#ffff", textAlign: "start" }}>
                 We streamline the booking process so it can happen anywhere, at
                 any time.
@@ -87,12 +87,12 @@ const Proposals = () => {
           data-aos-delay="600"
         >
           <Grid container sx={{ justifyContent: "space-between" }}>
-            <Grid item xs={12} md={1.5} className="listee-premium-img">
+            <Grid item xs={1.5} md={1.5} className="listee-premium-img">
               <span>
                 <img src={tick} alt="img" style={{ width: "100%" }} />
               </span>
             </Grid>
-            <Grid item xs={12} md={10} className="listee-premium-content">
+            <Grid item xs={10} md={10} className="listee-premium-content">
               <Typography sx={{ color: "#ffff", textAlign: "start" }}>
                 We provide an all-inclusive solution for your services.
               </Typography>
@@ -115,12 +115,12 @@ const Proposals = () => {
             data-aos="fade-up"
             sx={{ justifyContent: "space-between" }}
           >
-            <Grid item xs={12} md={1.5} className="listee-premium-img">
+            <Grid item xs={1.5} md={1.5} className="listee-premium-img">
               <span>
                 <img src={tick} alt="img" style={{ width: "100%" }} />
               </span>
             </Grid>
-            <Grid item xs={12} md={10} className="listee-premium-content">
+            <Grid item xs={10} md={10} className="listee-premium-content">
               <Typography sx={{ color: "#ffff", textAlign: "start" }}>
                 We provide instantaneous bookings and guarantee punctuality.
               </Typography>
@@ -143,12 +143,12 @@ const Proposals = () => {
             data-aos="fade-up"
             sx={{ justifyContent: "space-between" }}
           >
-            <Grid item xs={12} md={1.5} className="listee-premium-img">
+            <Grid item xs={1.5} md={1.5} className="listee-premium-img">
               <span>
                 <img src={tick} alt="img" style={{ width: "100%" }} />
               </span>
             </Grid>
-            <Grid item xs={12} md={10} className="listee-premium-content">
+            <Grid item xs={10} md={10} className="listee-premium-content">
               <Typography sx={{ color: "#ffff", textAlign: "start" }}>
                 We offer the simplest method for handling service reservations
                 and pay by the session.

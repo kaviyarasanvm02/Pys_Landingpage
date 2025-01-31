@@ -68,7 +68,7 @@ const Locations = () => {
           data-aos="fade-up"
           sx={{
             marginBottom: 2,
-            fontSize: "3rem",
+            fontSize: { xs: "1.8rem", md: "3rem" },
             color: "#fff",
             fontWeight: "bold",
           }}
@@ -92,12 +92,13 @@ const Locations = () => {
               item
               xs={12}
               sm={6}
-              md={3.5}
+              // md={4}
+              lg={3.5}
               key={index}
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
-              <Box
+              <Grid container
                 sx={{
                   display: "flex",
                   alignItems: "center",
@@ -108,21 +109,21 @@ const Locations = () => {
                   border: "2px solid #fff",
                 }}
               >
-                <Box sx={{ flexShrink: 0, padding: "12px 0px 7px 7px"}}>
+                <Grid item xs={4} sx={{ flexShrink: 0, padding: "12px 0px 7px 7px"}}>
                   <a href={location.link}>
                     <img
                       src={location.img}
                       alt={location.name}
                       style={{
-                        width: "93%",
+                        width: "100%",
                         height: "auto",
                         objectFit: "cover",
                         borderRadius: "8px" 
                       }}
                     />
                   </a>
-                </Box>
-                <Box sx={{ p: 2 }}>
+                </Grid>
+                <Grid item xs={8} sx={{ p: 2 }}>
                   <Typography variant="h6" sx={{ mb: 1 }}>
                     <Typography sx={{color: "#fff", fontWeight: "bold", fontSize: "20px", textAlign: "start"}}>{location.name}</Typography>
                   </Typography>
@@ -147,8 +148,8 @@ const Locations = () => {
                   >
                     View Details
                   </Button>
-                </Box>
-              </Box>
+                </Grid>
+              </Grid>
             </Grid>
           ))}
         </Grid>

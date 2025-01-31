@@ -43,7 +43,7 @@ const PYSPartners = () => {
           variant="h4"
           sx={{
             marginBottom: 4,
-            fontSize: "3rem",
+            fontSize: { xs: "1.8rem", md: "3rem" },
             color: "#fff",
             fontWeight: "bold",
           }}
@@ -52,7 +52,7 @@ const PYSPartners = () => {
         >
           What we offer for PYS Partners
         </Typography>
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 0, md: 3 }}>
           {/* Left Column */}
           <Grid item xs={12} md={4}>
             {leftItems.map((item, index) => (
@@ -75,7 +75,13 @@ const PYSPartners = () => {
           </Grid>
 
           {/* Center Image */}
-          <Grid item xs={12} md={4} data-aos="zoom-in">
+          <Grid
+            item
+            xs={12}
+            md={4}
+            data-aos="zoom-in"
+            sx={{ display: { xs: "none", md: "block" } }}
+          >
             <Box
               sx={{
                 display: "flex",
@@ -99,21 +105,40 @@ const PYSPartners = () => {
           {/* Right Column */}
           <Grid item xs={12} md={4}>
             {rightItems.map((item, index) => (
-              <Box
-                key={index}
-                sx={{
-                  background: "#fff",
-                  padding: "0.8rem",
-                  borderRadius: "8px",
-                  marginBottom: "1rem",
-                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                }}
-                data-aos="fade-left"
-              >
-                <Typography variant="body1" className="poppins-light">
-                  {item}
-                </Typography>
-              </Box>
+              <>
+                <Box
+                  key={index}
+                  sx={{
+                    background: "#fff",
+                    padding: "0.8rem",
+                    borderRadius: "8px",
+                    marginBottom: "1rem",
+                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                    display: { xs: "none", md: "block" },
+                  }}
+                  data-aos="fade-left"
+                >
+                  <Typography variant="body1" className="poppins-light">
+                    {item}
+                  </Typography>
+                </Box>
+                <Box
+                  key={index}
+                  sx={{
+                    background: "#fff",
+                    padding: "0.8rem",
+                    borderRadius: "8px",
+                    marginBottom: "1rem",
+                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                    display: { xs: "block", md: "none" },
+                  }}
+                  data-aos="fade-right"
+                >
+                  <Typography variant="body1" className="poppins-light">
+                    {item}
+                  </Typography>
+                </Box>
+              </>
             ))}
           </Grid>
         </Grid>
