@@ -3,6 +3,9 @@ import { Grid, Typography, Box, Container,AppBar,Toolbar,IconButton,Button } fro
 import mobileView from "../assests/3333.png"; // Make sure the image path is correct
 import Footer from "../Component/Footer";
 import logo from "../assests/logo.png";
+import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from 'react-router-dom';
+
 const About = () => {
   return (
     <>
