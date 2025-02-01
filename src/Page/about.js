@@ -4,19 +4,12 @@ import {
   Typography,
   Box,
   Container,
-  AppBar,
-  Toolbar,
-  IconButton,
-  Button,
   useMediaQuery,
   useTheme,
 } from "@mui/material";
 import mobileView from "../assests/3333.png";
-import Footer from "../Component/Footer";
-import logo from "../assests/logo.png";
 import BgImg from "../assests/video-bg.png";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Link } from "react-router-dom";
+import NavBar from "../Component/NavBar";
 
 const About = () => {
   const theme = useTheme();
@@ -24,44 +17,11 @@ const About = () => {
 
   return (
     <>
-      {/* Navbar */}
-      <AppBar position="static" color="transparent" elevation={0}>
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            <img src={logo} alt="Logo" style={{ height: "40px" }} />
-          </Typography>
-          {!isMobile && (
-            <>
-              <Button color="inherit" href="listing-grid.html">
-                Venue
-              </Button>
-              <Button color="inherit" component={Link} to="/about">
-                About Us
-              </Button>
-              <Button color="inherit" href="blog-grid-sidebar.html">
-                Blog
-              </Button>
-              <Button color="inherit" component={Link} to="/contact">
-                Contact
-              </Button>
-              <Button color="inherit" href="/signin">
-                Sign In
-              </Button>
-            </>
-          )}
-          {/* <Button color="inherit" href="/signin">
-            Sign In
-          </Button> */}
-        </Toolbar>
-      </AppBar>
+      <NavBar />
 
-      {/* Main Content */}
       <Box
         sx={{
-          py: 6,
+          py: 8,
           backgroundImage: `url(${BgImg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
@@ -69,10 +29,10 @@ const About = () => {
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
+          overflowX : "hidden"
         }}
       >
-        <Container>
-          {/* About Content */}
+        <Container maxWidth="lg">
           <Grid container spacing={4} alignItems="center">
             <Grid item xs={12} md={6} order={{ xs: 2, md: 1 }}>
               <Box sx={{ textAlign: "center" }}>
@@ -81,7 +41,7 @@ const About = () => {
                   className="img-fluid"
                   alt="About"
                   style={{
-                    width: "100%",
+                    width: "auto",
                     height: "600px",
                     // maxHeight: "500px",
                   }}
@@ -89,7 +49,13 @@ const About = () => {
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={6} order={{ xs: 1, md: 2 }}>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              order={{ xs: 1, md: 2 }}
+              sx={{ width: "100%", display: "flex", justifyContent: "center" }} 
+            >
               <Box
                 sx={{
                   backgroundColor: "#211d2e",
@@ -97,8 +63,9 @@ const About = () => {
                   borderRadius: "12px",
                   boxShadow: 3,
                   textAlign: "left",
-                  width: "100%",
-                  maxWidth: "800px",
+                  width: "90%", 
+                  maxWidth: isMobile ? "100%" : "800px",
+                  boxSizing: "border-box",
                 }}
               >
                 <Typography
@@ -106,7 +73,7 @@ const About = () => {
                   sx={{
                     fontWeight: "bold",
                     color: "#fff",
-                    fontSize: isMobile ? "28px" : "36px",
+                    fontSize: isMobile ? "24px" : "36px", // Reduce font size for mobile
                   }}
                 >
                   <span>About</span> Pick Your Slot
@@ -136,7 +103,6 @@ const About = () => {
             </Grid>
           </Grid>
 
-          {/* How It Works */}
           <Box sx={{ mt: 6 }}>
             <Typography
               variant="h3"
@@ -207,6 +173,7 @@ const About = () => {
                         background: "linear-gradient(135deg, #090a0f, #2d006d)",
                         backgroundColor: "#211d2e",
                       },
+                      boxSizing: "border-box",
                     }}
                   >
                     <Typography
@@ -285,9 +252,6 @@ const About = () => {
             </Grid>
           </Box>
         </Container>
-
-        {/* Footer */}
-        <Footer />
       </Box>
     </>
   );
