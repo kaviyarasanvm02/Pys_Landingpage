@@ -3,9 +3,10 @@ import { Container, Grid, Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "@mui/icons-material";
 import AOS from "aos";
-import "aos/dist/aos.css"; // Import AOS styles
+import "aos/dist/aos.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import shapesRound from "../assests/shapes-round.png";
 import blog1 from "../assests/blog/blog-1.jpg";
 import blog2 from "../assests/blog/blog-2.jpg";
 import blog3 from "../assests/blog/blog-3.jpg";
@@ -13,13 +14,12 @@ import blog3 from "../assests/blog/blog-3.jpg";
 const HomePageBlog = () => {
   useEffect(() => {
     AOS.init({
-      duration: 1000, // Animation duration
-      easing: "ease-in-out", // Animation easing
-      once: true, // Animation will happen only once
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true,
     });
   }, []);
 
-  // Blog data array
   const blogData = [
     {
       id: 1,
@@ -55,7 +55,55 @@ const HomePageBlog = () => {
 
   return (
     <section className="blog-section">
-      <Box sx={{ py: 6 }}>
+      <Box sx={{ py: 6, position: "relative" }}>
+        <Box
+          sx={{
+            position: "absolute",
+            // bottom: "0%",
+            top: "5%",
+            right: "45%",
+            width: "55%",
+            transform: "translateX(400px)",
+            zIndex: 0,
+            transitionTimingFunction: "ease-out",
+            animation: "drive 2s forwards",
+            display: { xs: "none", md: "block" },
+          }}
+        >
+          <img src={shapesRound} alt="Decoration" style={{ width: "400px" }} />
+        </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            // bottom: "40%",
+            top: "80%",
+            right: "60%",
+            width: "55%",
+            transform: "translateX(400px)",
+            zIndex: 0,
+            transitionTimingFunction: "ease-out",
+            animation: "drive 2s forwards",
+            display: { xs: "none", md: "block" },
+          }}
+        >
+          <img src={shapesRound} alt="Decoration" style={{ width: "350px" }} />
+        </Box>
+        <Box
+          sx={{
+            position: "absolute",
+            // bottom: "40%",
+            top: "200%",
+            right: "60%",
+            width: "55%",
+            transform: "translateX(400px)",
+            zIndex: 0,
+            transitionTimingFunction: "ease-out",
+            animation: "drive 2s forwards",
+            display: { xs: "none", md: "block" },
+          }}
+        >
+          <img src={shapesRound} alt="Decoration" style={{ width: "350px" }} />
+        </Box>
         <Container maxWidth="xl">
           <Grid container alignItems="center" justifyContent="space-around">
             <Grid item xs={12} md={5} data-aos="fade-up">
@@ -90,12 +138,12 @@ const HomePageBlog = () => {
 
       <Container maxWidth="xl">
         <Grid container spacing={3} justifyContent={"center"}>
-          {/* Map through blogData array */}
           {blogData.map((blog, index) => (
             <Grid
               item
               lg={3.6}
               md={4}
+              sm={6}
               xs={12}
               key={blog.id}
               data-aos="fade-up"
@@ -130,7 +178,7 @@ const HomePageBlog = () => {
                 </Box>
                 <Box className="blog-content" sx={{ margin: 1.5 }}>
                   <Grid container spacing={2}>
-                    <Grid item xs={2.8}>
+                    <Grid item xs={2.1} sm={3.5} md={2.5}>
                       <Button
                         variant="contained"
                         size="small"
@@ -139,7 +187,7 @@ const HomePageBlog = () => {
                         Health
                       </Button>
                     </Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={2} sm={3} md={2}>
                       <Button
                         variant="contained"
                         size="small"
@@ -192,7 +240,7 @@ const HomePageBlog = () => {
                       </Typography>
                     </Grid>
                     <Grid item xs={1}>
-                      <ArrowForwardIcon sx={{ color: "#fff", fontSize: 20 }}/>
+                      <ArrowForwardIcon sx={{ color: "#fff", fontSize: "5px" }} />
                     </Grid>
                   </Grid>
                 </Box>

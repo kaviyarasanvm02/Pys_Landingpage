@@ -28,28 +28,13 @@ const Offer = () => {
             }
           `}
       </style>
-      <Box
-        sx={{
-          position: "absolute",
-          //   bottom: "10%",
-          top: "100%",
-          right: "80%",
-          width: "50%",
-          transform: "translateX(400px)",
-          zIndex: 0,
-          transitionTimingFunction: "ease-out",
-          animation: "drive 2s forwards",
-          display: {xs: "none", md: "block"}
-        }}
-      >
-        <img src={shapesRound} alt="Decoration" style={{ width: "400px" }} />
-      </Box>
+      
       <Box
         sx={{
           position: "absolute",
           //   bottom: "40%",
           top: "5%",
-          right: "60%",
+          right: "40%",
           width: "50%",
           transform: "translateX(400px)",
           zIndex: 0,
@@ -60,6 +45,22 @@ const Offer = () => {
         }}
       >
         <img src={shapesRound} alt="Decoration" style={{ width: "350px" }} />
+      </Box>
+      <Box
+        sx={{
+          position: "absolute",
+          //   bottom: "10%",
+          top: "100%",
+          right: "60%",
+          width: "50%",
+          transform: "translateX(400px)",
+          zIndex: 0,
+          transitionTimingFunction: "ease-out",
+          animation: "drive 2s forwards",
+          display: {xs: "none", md: "block"}
+        }}
+      >
+        <img src={shapesRound} alt="Decoration" style={{ width: "400px" }} />
       </Box>
       <Container maxWidth="xl" sx={{mt: 8}}>
         <Grid container sx={{ justifyContent: "center" }}>

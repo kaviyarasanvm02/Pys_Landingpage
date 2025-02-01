@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Box, Typography, Grid, Container } from "@mui/material";
 import Aos from "aos";
+import shapesRound from "../assests/shapes-round.png";
 import "aos/dist/aos.css"; // Import AOS styles
 import partner from "../assests/Partner.png";
 
@@ -30,7 +31,60 @@ const PYSPartners = () => {
   }, []);
 
   return (
-    <Container maxWidth="xl">
+    <Container
+      maxWidth="xl"
+      sx={{
+        position: "relative",
+      }}
+    >
+      <Box
+        sx={{
+          position: "absolute",
+          // bottom: "0%",
+          top: "5%",
+          right: "45%",
+          width: "55%",
+          transform: "translateX(400px)",
+          zIndex: 0,
+          transitionTimingFunction: "ease-out",
+          animation: "drive 2s forwards",
+          display: { xs: "none", md: "block" },
+        }}
+      >
+        <img src={shapesRound} alt="Decoration" style={{ width: "400px" }} />
+      </Box>
+      <Box
+        sx={{
+          position: "absolute",
+          // bottom: "40%",
+          top: "80%",
+          right: "60%",
+          width: "55%",
+          transform: "translateX(400px)",
+          zIndex: 0,
+          transitionTimingFunction: "ease-out",
+          animation: "drive 2s forwards",
+          display: { xs: "none", md: "block" },
+        }}
+      >
+        <img src={shapesRound} alt="Decoration" style={{ width: "350px" }} />
+      </Box>
+      <Box
+        sx={{
+          position: "absolute",
+          // bottom: "40%",
+          top: "43%",
+          right: "30%",
+          width: "80%",
+          transform: "translateX(400px)",
+          zIndex: 0,
+          transitionTimingFunction: "ease-out",
+          animation: "drive 2s forwards",
+          display: { xs: "none", md: "block" },
+        }}
+      >
+        <img src={shapesRound} alt="Decoration" style={{ width: "350px" }} />
+      </Box>
       <Box
         sx={{
           // background: "#f7f7f7",
