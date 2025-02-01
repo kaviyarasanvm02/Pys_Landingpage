@@ -30,7 +30,8 @@ const Home = () => {
       <Box
         sx={{
           backgroundColor: "#111018",
-          paddingTop: {xs: 10, md: 1}
+          paddingTop: {xs: 10, md: 1},
+          paddingBottom: {xs: 2, md: 6}
         }}
       >
         <Box
@@ -57,8 +58,8 @@ const Home = () => {
           <Box
             sx={{
               position: "absolute",
-              bottom: "10%",
-              right: "80%",
+              bottom: "40%",
+              right: "40%",
               width: "50%",
               transform: "translateX(400px)",
               zIndex: 1,
@@ -75,7 +76,7 @@ const Home = () => {
           <Box
             sx={{
               position: "absolute",
-              bottom: "40%",
+              bottom: "5%",
               right: "60%",
               width: "50%",
               transform: "translateX(400px)",
@@ -87,7 +88,7 @@ const Home = () => {
             <img
               src={shapesRound}
               alt="Decoration"
-              style={{ width: "350px" }}
+              style={{ width: "400px" }}
             />
           </Box>
           <Container>
@@ -199,7 +200,7 @@ const Home = () => {
         <PYSPartners />
         <Locations />
         <HomePageBlog />
-        <Footer />
+        {/* <Footer /> */}
       </Box>
     </div>
   );
