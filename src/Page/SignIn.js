@@ -9,23 +9,18 @@ import {
   FormControlLabel,
   Link,
   Box,
-  AppBar,
-  Toolbar,
   IconButton,
   InputAdornment,
-  useMediaQuery,
-  useTheme,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { styled } from "@mui/material/styles";
-import logo from "../assests/logo.png";
 import BgImg from "../assests/video-bg.png";
 import { motion } from "framer-motion";
+import NavBar from "../Component/NavBar";
 
 // Custom styled TextField
 const StyledTextField = styled(TextField)(({ theme }) => ({
@@ -60,8 +55,6 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "" });
 
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleToggleForgotPassword = () => {
     setIsForgotPassword(!isForgotPassword);
@@ -123,38 +116,7 @@ const SignIn = () => {
   return (
     <>
       {/* Navbar */}
-      <AppBar position="static" color="transparent" elevation={0}>
-        <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <Box sx={{ flexGrow: 1 }}>
-            <img src={logo} alt="Logo" style={{ height: "40px" }} />
-          </Box>
-          {!isMobile && (
-            <>
-              <Button color="inherit" href="listing-grid.html">
-                Venue
-              </Button>
-              <Button color="inherit" href="/about">
-                About Us
-              </Button>
-              <Button color="inherit" href="blog-grid-sidebar.html">
-                Blog
-              </Button>
-              <Button color="inherit" href="/contact">
-                Contact
-              </Button>
-              <Button color="inherit" href="/signin">
-                Sign In
-              </Button>
-            </>
-          )}
-          {/* <Button color="inherit" href="/signin">
-            Sign In
-          </Button> */}
-        </Toolbar>
-      </AppBar>
+      <NavBar />
 
       {/* Breadcrumb */}
       <motion.div
@@ -381,7 +343,6 @@ const SignIn = () => {
                       fullWidth
                       type="submit"
                       variant="contained"
-                      disabled={!!errors.email || !!errors.password}
                       sx={{
                         mt: 2,
                         bgcolor: "white",
