@@ -15,7 +15,7 @@ import {
   Favorite,
   Visibility,
 } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavBar from "../Component/NavBar";
 import BgImg from "../assests/video-bg.png";
 import openingSoonImg from "../assests/list/listgrid-1.png";
@@ -62,6 +62,9 @@ const venues = [
 ];
 
 const Venue = () => {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const category = queryParams.get("category") || "all";
   const [favorites, setFavorites] = useState({});
   const navigate = useNavigate();
 
@@ -80,37 +83,57 @@ const Venue = () => {
     <>
       {/* <NavBar /> */}
       <Box
+  sx={{
+    position: "relative",
+    textAlign: "center",
+    backgroundImage: `url(${BgImg})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    color: "white",
+    minHeight: "30vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 2,
+  }}
+>
+  <Typography variant="h4" fontWeight={700} sx={{ zIndex: 2 }}>
+    {category === "all" ? "All Venues" : `Venues for ${category}`}
+  </Typography>
+
+
+  <Typography
+    variant="body2"
+    sx={{
+      position: "absolute",
+      bottom: 40, // Moves breadcrumbs lower
+      left: "50%",
+      transform: "translateX(-50%)",
+      zIndex: 2, // Ensures visibility over background
+    }}
+  >
+    <Link href="/" underline="hover" color="inherit">
+      Home
+    </Link>{" "}
+    / Venues
+  </Typography>
+</Box>
+
+
+      <Box
         sx={{
-          position: "relative",
-          textAlign: "center",
+          p: 3,
+          background: "#0f0f23",
           backgroundImage: `url(${BgImg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          color: "white",
-          minHeight: "30vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          padding : 2
+          backgroundRepeat: "repeat-y",
         }}
       >
-        <Typography variant="h4" fontWeight={700} sx={{ zIndex : 1}}>
-          Venues
-        </Typography> 
-        <Typography variant="body2" sx={{ position: "relative", zIndex: 1, marginTop : 10 ,marginLeft : -14 }}>
-          <Link href="/" underline="hover" color="inherit">
-            Home
-          </Link>{" "}
-          / Venues
-        </Typography>
-      </Box>
-
-      <Box sx={{ p: 3, background: "#0f0f23",   backgroundImage: `url(${BgImg})`,backgroundRepeat : "repeat-y" }}>
         <Grid container spacing={3}>
           {venues.map((venue) => (
             <Grid item lg={4} md={4} sm={6} xs={12} key={venue.id}>
               <Card
-                sx={{                 
+                sx={{
                   boxShadow: 3,
                   background: "#151529",
                   color: "white",

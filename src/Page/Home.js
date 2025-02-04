@@ -162,7 +162,7 @@ const Home = () => {
             </Grid>
           </Container>
         </Box>
-        {/* <Categories /> */}
+        <Categories />
         <Offer />
         <Proposals />
         <PYSPartners />
