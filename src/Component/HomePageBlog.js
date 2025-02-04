@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Container, Grid, Typography, Button, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
@@ -10,6 +10,12 @@ import blog2 from "../assests/blog/blog-2.jpg";
 import blog3 from "../assests/blog/blog-3.jpg";
 
 const HomePageBlog = () => {
+  const navigate = useNavigate()
+
+  const handleNavigate = (blogId)=> {
+    navigate(`/blog-details/${blogId}`)
+  }
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -74,10 +80,10 @@ const HomePageBlog = () => {
             </Grid>
             <Grid item xs={12} md={5} textAlign="right" data-aos="fade-up">
               <Button
-                variant="contained"
-                color="primary"
+                variant="outlined"
+                sx={{ color: "#fff", borderColor: "#fff" }}
                 component={Link}
-                to="/blog-grid-sidebar"
+                to="/blog"
               >
                 View All
               </Button>
@@ -128,7 +134,7 @@ const HomePageBlog = () => {
                 </Box>
                 <Box className="blog-content" sx={{ margin: 1.5 }}>
                   <Grid container spacing={2}>
-                    <Grid item xs={2.1} sm={3.5} md={2.5}>
+                    <Grid item xs={2.1} sm={3.3} md={4} lg={3}>
                       <Button
                         variant="contained"
                         size="small"
@@ -137,7 +143,7 @@ const HomePageBlog = () => {
                         Health
                       </Button>
                     </Grid>
-                    <Grid item xs={2} sm={3} md={2}>
+                    <Grid item xs={2} sm={3} lg={2}>
                       <Button
                         variant="contained"
                         size="small"
@@ -185,12 +191,13 @@ const HomePageBlog = () => {
                         variant="body2"
                         className="viewlink"
                         sx={{ color: "#fff" }}
+                        onClick={() => handleNavigate(blog.id)}
                       >
                         View Details
                       </Typography>
                     </Grid>
                     <Grid item xs={1}>
-                      <ArrowForwardIcon sx={{ color: "#fff", fontSize: "5px" }} />
+                      <ArrowForwardIcon sx={{ color: "#fff", fontSize: 20 }} />
                     </Grid>
                   </Grid>
                 </Box>
