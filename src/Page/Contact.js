@@ -15,7 +15,7 @@ import NavBar from "../Component/NavBar";
 const Contact = () => {
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
 
       <Box
         sx={{

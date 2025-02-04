@@ -10,6 +10,8 @@ import Footer from "./Component/Footer";
 import Venue from "./Page/Venue";
 import VenueDetails from "./Page/VenueDetails";
 import { useState } from "react";
+import NavBar from "./Component/NavBar";
+import BlogDetails from "./Page/BlogDetails";
 function App() {
   const [openRewardDialog, setOpenRewardDialog] = useState(false);
 
@@ -23,6 +25,7 @@ function App() {
 
   return (
     <Router>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/venue" element={<Venue />} />
@@ -32,6 +35,7 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog-details/:id" element={<BlogDetails />}/>
         <Route path="/contact" element={<Contact />} />
         <Route path="/signin" element={<SignIn />} />
       </Routes>

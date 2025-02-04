@@ -17,7 +17,7 @@ const About = () => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
 
       <Box
         sx={{

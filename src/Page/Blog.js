@@ -14,7 +14,7 @@ import {
   List,
   ListItem,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
@@ -28,8 +28,10 @@ import PostImage from "../assests/blog/blog-1.jpg";
 import PostImage4 from "../assests/blog/blog-4.jpg";
 
 const Blog = () => {
+const navigate = useNavigate()
   const blogPosts = [
     {
+      id: 1,
       title: "The Best Spa Saloons for your relaxations?",
       date: "October 6, 2024",
       description:
@@ -38,6 +40,7 @@ const Blog = () => {
       link: "blog-details.html",
     },
     {
+      id: 2,
       title: "The Best Spa Saloons for your relaxations?",
       date: "October 6, 2024",
       description:
@@ -46,6 +49,7 @@ const Blog = () => {
       link: "blog-details.html",
     },
     {
+      id: 3,
       title: "The Best Spa Saloons for your relaxations?",
       date: "October 6, 2024",
       description:
@@ -54,6 +58,7 @@ const Blog = () => {
       link: "blog-details.html",
     },
     {
+      id: 4,
       title: "The Best Spa Saloons for your relaxations?",
       date: "October 6, 2024",
       description:
@@ -62,6 +67,7 @@ const Blog = () => {
       link: "blog-details.html",
     },
     {
+      id: 5,
       title: "The Best Spa Saloons for your relaxations?",
       date: "October 6, 2024",
       description:
@@ -70,6 +76,7 @@ const Blog = () => {
       link: "blog-details.html",
     },
     {
+      id: 6,
       title: "The Best Spa Saloons for your relaxations?",
       date: "October 6, 2024",
       description:
@@ -101,18 +108,21 @@ const Blog = () => {
   ];
   const articles = [
     {
+      id: 1,
       title: "Great Business Tips in 2024",
       date: "October 6, 2024",
       link: "blog-details.html",
       image: Articleimg,
     },
     {
+      id: 2,
       title: "Exciting News About Fashion",
       date: "October 9, 2024",
       link: "blog-details.html",
       image: Articleimg,
     },
     {
+      id: 3,
       title: "8 Amazing Tricks About Business",
       date: "October 10, 2024",
       link: "blog-details.html",
@@ -120,9 +130,13 @@ const Blog = () => {
     },
   ];
 
+  const handleNavigate = (blogId)=> {
+    navigate(`/blog-details/${blogId}`)
+  }
+
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       {/* <Box
         sx={{
           zIndex: 1,
@@ -343,7 +357,8 @@ const Blog = () => {
                           fontFamily: "Poppins, sans-serif",
                           cursor: "pointer",
                         }}
-                        href={post.link}
+                        // href={post.link}
+                        onClick={() => handleNavigate(post.id)}
                       >
                         View Details
                         <ArrowForwardIcon sx={{marginLeft: 1, marginTop: "5px", fontSize: 20, marginBottom: 0.5 }} />

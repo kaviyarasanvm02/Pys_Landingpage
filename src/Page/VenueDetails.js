@@ -80,7 +80,7 @@ const VenueDetails = ({ venueId,onBookNowClick }) => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <HeaderImage />
       <Box
         sx={{
