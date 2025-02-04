@@ -55,7 +55,6 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "" });
 
-
   const handleToggleForgotPassword = () => {
     setIsForgotPassword(!isForgotPassword);
   };
@@ -115,42 +114,6 @@ const SignIn = () => {
 
   return (
     <>
-      {/* Navbar */}
-      {/* <NavBar /> */}
-
-      {/* Breadcrumb */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Box
-          py={2}
-          textAlign="center"
-          sx={{
-            backgroundImage: `url(${BgImg})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            color: "white",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            minHeight: "30vh",
-          }}
-        >
-          <Typography variant="h4" fontWeight={700}>
-            {isForgotPassword ? "Forgot Password" : "Login"}
-          </Typography>
-          <Typography variant="body2">
-            <Link href="/" underline="hover" color="inherit">
-              Home
-            </Link>{" "}
-            / {isForgotPassword ? "Forgot Password" : "Login"}
-          </Typography>
-        </Box>
-      </motion.div>
-
       {/* Login/Forgot Password Form */}
       <Box
         sx={{
@@ -163,7 +126,32 @@ const SignIn = () => {
           justifyContent: "center",
         }}
       >
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" sx={{ marginTop: 3, marginBottom: 4 }}>
+          <Box
+            py={2}
+            textAlign="center"
+            sx={{
+              color: "white",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              // minHeight: "25vh",
+              paddingTop: 8,
+              paddingBottom: 2
+            }}
+          >
+            <Typography variant="h4" fontWeight={700}>
+              {isForgotPassword ? "Forgot Password" : "Login"}
+            </Typography>
+            <Typography variant="body2">
+              <Link href="/" underline="hover" color="inherit">
+                Home
+              </Link>{" "}
+              / {isForgotPassword ? "Forgot Password" : "Login"}
+            </Typography>
+          </Box>
+
           <motion.div
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
