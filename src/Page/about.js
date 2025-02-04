@@ -73,7 +73,7 @@ const About = () => {
                   sx={{
                     fontWeight: "bold",
                     color: "#fff",
-                    fontSize: isMobile ? "24px" : "36px", // Reduce font size for mobile
+                    fontSize: isMobile ? "24px" : "36px",
                   }}
                 >
                   <span>About</span> Pick Your Slot
@@ -174,6 +174,7 @@ const About = () => {
                         backgroundColor: "#211d2e",
                       },
                       boxSizing: "border-box",
+                      height : '100%'
                     }}
                   >
                     <Typography
