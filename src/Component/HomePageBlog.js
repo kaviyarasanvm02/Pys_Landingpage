@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { Container, Grid, Typography, Button, Box } from "@mui/material";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "@mui/icons-material";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import shapesRound from "../assests/shapes-round.png";
 import blog1 from "../assests/blog/blog-1.jpg";
 import blog2 from "../assests/blog/blog-2.jpg";
 import blog3 from "../assests/blog/blog-3.jpg";
@@ -56,54 +54,6 @@ const HomePageBlog = () => {
   return (
     <section className="blog-section">
       <Box sx={{ py: 6, position: "relative" }}>
-        <Box
-          sx={{
-            position: "absolute",
-            // bottom: "0%",
-            top: "5%",
-            right: "45%",
-            width: "55%",
-            transform: "translateX(400px)",
-            zIndex: 0,
-            transitionTimingFunction: "ease-out",
-            animation: "drive 2s forwards",
-            display: { xs: "none", md: "block" },
-          }}
-        >
-          <img src={shapesRound} alt="Decoration" style={{ width: "400px" }} />
-        </Box>
-        <Box
-          sx={{
-            position: "absolute",
-            // bottom: "40%",
-            top: "80%",
-            right: "60%",
-            width: "55%",
-            transform: "translateX(400px)",
-            zIndex: 0,
-            transitionTimingFunction: "ease-out",
-            animation: "drive 2s forwards",
-            display: { xs: "none", md: "block" },
-          }}
-        >
-          <img src={shapesRound} alt="Decoration" style={{ width: "350px" }} />
-        </Box>
-        <Box
-          sx={{
-            position: "absolute",
-            // bottom: "40%",
-            top: "200%",
-            right: "60%",
-            width: "55%",
-            transform: "translateX(400px)",
-            zIndex: 0,
-            transitionTimingFunction: "ease-out",
-            animation: "drive 2s forwards",
-            display: { xs: "none", md: "block" },
-          }}
-        >
-          <img src={shapesRound} alt="Decoration" style={{ width: "350px" }} />
-        </Box>
         <Container maxWidth="xl">
           <Grid container alignItems="center" justifyContent="space-around">
             <Grid item xs={12} md={5} data-aos="fade-up">
