@@ -19,6 +19,8 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
+import BgImg from "../assests/video-bg.png";
+import { motion } from "framer-motion";
 import NavBar from "../Component/NavBar";
 import Articleimg from "../assests/blog/article-1.jpg";
 import shapesRound from "../assests/shapes-round.png";
@@ -121,7 +123,7 @@ const Blog = () => {
   return (
     <div>
       <NavBar />
-      <Box
+      {/* <Box
         sx={{
           zIndex: 1,
           backgroundColor: "#111018",
@@ -129,7 +131,7 @@ const Blog = () => {
         }}
       >
         <Container maxWidth="xl" sx={{ position: "relative", zIndex: 3 }}>
-          {/* <Box
+          <Box
             sx={{
               position: "absolute",
               top: { xs: "5%", md: "-60%" },
@@ -145,8 +147,8 @@ const Blog = () => {
             }}
           >
             <img src={shapesRound} alt="Decoration" style={{ width: "100%" }} />
-          </Box> */}
-          {/* <Box
+          </Box>
+          <Box
             sx={{
               position: "absolute",
               top: { xs: "5%", md: "0%" },
@@ -162,7 +164,7 @@ const Blog = () => {
             }}
           >
             <img src={shapesRound} alt="Decoration" style={{ width: "100%" }} />
-          </Box> */}
+          </Box>
           <Grid
             container
             justifyContent="center"
@@ -202,13 +204,49 @@ const Blog = () => {
             </Grid>
           </Grid>
         </Container>
-      </Box>
-      <Box
+      </Box> */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <Box
+          py={2}
+          textAlign="center"
+          sx={{
+            backgroundImage: `url(${BgImg})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            color: "white",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "30vh",
+          }}
+        >
+          <Typography variant="h4" fontWeight={700}>
+            Blog
+          </Typography>
+          <Typography variant="body2">
+            <Link href="/" underline="hover" color="inherit">
+              Home
+            </Link>{" "}
+            / Blog
+          </Typography>
+        </Box>
+      </motion.div>
+      <Container maxWidth='lx'
         sx={{
           paddingBottom: { xs: 2, md: 7 },
           position: "relative",
           zIndex: 1,
           backgroundColor: "#111018",
+          backgroundImage: `url(${BgImg})`,
+          // backgroundSize: "cover",
+          backgroundPosition: "center",
+          // minHeight: "30vh",
+          backgroundRepeat: "repeat-y"
         }}
       >
         <Grid container spacing={4}>
@@ -383,7 +421,7 @@ const Blog = () => {
                 <Box
                   sx={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(3, 1fr)",
+                    gridTemplateColumns: {xs:"repeat(3, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)"},
                     gap: 1,
                   }}
                 >
@@ -438,7 +476,7 @@ const Blog = () => {
                   >
                     <Box
                       sx={{
-                        width: "244px",
+                        // width: "100%",
                         height: "140px",
                         backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 1.6), rgba(0, 0, 0, 0.1)), url(${article.image})`,
                         backgroundSize: "cover",
@@ -486,7 +524,7 @@ const Blog = () => {
             </Box>
           </Grid>
         </Grid>
-      </Box>
+      </Container>
     </div>
   );
 };

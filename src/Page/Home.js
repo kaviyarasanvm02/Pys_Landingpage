@@ -10,15 +10,14 @@ import {
   Grid,
 } from "@mui/material";
 import banner from "../assests/banner.svg";
-import shapesRound from "../assests/shapes-round.png";
 import Offer from "../Component/Offer";
 import Proposals from "../Component/Proposals";
 import PYSPartners from "../Component/PYSPartners";
 import Locations from "../Component/Locations";
-import Footer from "../Component/Footer";
 import NavBar from "../Component/NavBar";
 import Categories from "../Component/Categories ";
 import HomePageBlog from "../Component/HomePageBlog";
+import BgImg from "../assests/video-bg.png";
 
 
 const Home = () => {
@@ -31,7 +30,12 @@ const Home = () => {
         sx={{
           backgroundColor: "#111018",
           paddingTop: {xs: 10, md: 1},
-          paddingBottom: {xs: 2, md: 6}
+          paddingBottom: {xs: 2, md: 6},
+           backgroundImage: `url(${BgImg})`,
+          // backgroundSize: "cover",
+          backgroundPosition: "center",
+          // minHeight: "30vh",
+          backgroundRepeat: "repeat-y"
         }}
       >
         <Box
@@ -55,42 +59,6 @@ const Home = () => {
             }
           `}
           </style>
-          <Box
-            sx={{
-              position: "absolute",
-              bottom: "40%",
-              right: "40%",
-              width: "50%",
-              transform: "translateX(400px)",
-              zIndex: 1,
-              transitionTimingFunction: "ease-out",
-              animation: "drive 2s forwards",
-            }}
-          >
-            <img
-              src={shapesRound}
-              alt="Decoration"
-              style={{ width: "400px" }}
-            />
-          </Box>
-          <Box
-            sx={{
-              position: "absolute",
-              bottom: "5%",
-              right: "60%",
-              width: "50%",
-              transform: "translateX(400px)",
-              zIndex: 1,
-              transitionTimingFunction: "ease-out",
-              animation: "drive 2s forwards",
-            }}
-          >
-            <img
-              src={shapesRound}
-              alt="Decoration"
-              style={{ width: "400px" }}
-            />
-          </Box>
           <Container>
             <Grid container alignItems="center" spacing={4}>
               <Grid item xs={12} md={7}>
@@ -200,7 +168,6 @@ const Home = () => {
         <PYSPartners />
         <Locations />
         <HomePageBlog />
-        {/* <Footer /> */}
       </Box>
     </div>
   );
