@@ -15,7 +15,7 @@ import {
   Favorite,
   Visibility,
 } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import NavBar from "../Component/NavBar";
 import BgImg from "../assests/video-bg.png";
 import openingSoonImg from "../assests/list/listgrid-1.png";
@@ -68,13 +68,13 @@ const Venue = () => {
   const toggleFavorite = (id) => {
     setFavorites((prev) => ({
       ...prev,
-      [id]: !prev[id], 
+      [id]: !prev[id],
     }));
   };
 
   const handleCardClick = (id) => {
     navigate(`/venue-details/${id}`);
-  }
+  };
 
   return (
     <>
@@ -91,9 +91,13 @@ const Venue = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          padding : 2
         }}
       >
-        <Typography variant="body2" sx={{ position: "relative", zIndex: 1 }}>
+        <Typography variant="h4" fontWeight={700} sx={{ zIndex : 1}}>
+          Venues
+        </Typography> 
+        <Typography variant="body2" sx={{ position: "relative", zIndex: 1, marginTop : 10 ,marginLeft : -14 }}>
           <Link href="/" underline="hover" color="inherit">
             Home
           </Link>{" "}
@@ -101,19 +105,19 @@ const Venue = () => {
         </Typography>
       </Box>
 
-      <Box sx={{ p: 3, background: "#0f0f23" }}>
+      <Box sx={{ p: 3, background: "#0f0f23",   backgroundImage: `url(${BgImg})`,backgroundRepeat : "repeat-y" }}>
         <Grid container spacing={3}>
           {venues.map((venue) => (
             <Grid item lg={4} md={4} sm={6} xs={12} key={venue.id}>
               <Card
-                sx={{
+                sx={{                 
                   boxShadow: 3,
                   background: "#151529",
                   color: "white",
-                  width: "90%", 
-                  margin: "auto", 
+                  width: "90%",
+                  margin: "auto",
                   borderRadius: "20px",
-                  cursor:"pointer"
+                  cursor: "pointer",
                 }}
                 onClick={() => handleCardClick(venue.id)}
               >
@@ -131,7 +135,7 @@ const Venue = () => {
                     alt="Opening Soon"
                     style={{
                       width: "100%",
-                      height: "auto", 
+                      height: "auto",
                       borderRadius: "20px 20px 0 0",
                     }}
                   />
@@ -256,7 +260,6 @@ const Venue = () => {
           ))}
         </Grid>
       </Box>
-  
     </>
   );
 };

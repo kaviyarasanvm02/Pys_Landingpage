@@ -31,10 +31,9 @@ const blinkingBackground = keyframes`
   100% { background-color: #1db9aa; }
 `;
 
-const Footer = () => {
+const Footer = ({ openRewardDialog, onOpenRewardDialog, onCloseRewardDialog }) => {
   const currentYear = new Date().getFullYear();
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const [openRewardDialog, setOpenRewardDialog] = useState(false);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -42,30 +41,15 @@ const Footer = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setShowScrollButton(true);
-      } else {
-        setShowScrollButton(false);
-      }
+      setShowScrollButton(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleOpenRewardDialog = () => {
-    setOpenRewardDialog(true);
-  };
-
-  const handleCloseRewardDialog = () => {
-    setOpenRewardDialog(false);
-  };
-
   return (
-    <Box component="footer" sx={{ backgroundColor: "#1a1a1a", py: 4}}>
+    <Box component="footer" sx={{ backgroundColor: "#1a1a1a", py: 4 }}>
       <Container>
         <Grid container spacing={4} alignItems="flex-start">
           <Grid item xs={12} md={4} textAlign="center">
@@ -75,7 +59,7 @@ const Footer = () => {
               component="img"
               src={pysLogo}
               alt="logo"
-              sx={{ width: 150, mb: 2,cursor:"pointer" }}
+              sx={{ width: 150, mb: 2, cursor: "pointer" }}
             />
             <Box>
               <IconButton
@@ -175,11 +159,11 @@ const Footer = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={handleOpenRewardDialog}
+          onClick={onOpenRewardDialog}
           sx={{
             whiteSpace: "nowrap",
             minWidth: "160px",
-            height: "50px", //
+            height: "50px",
             fontSize: "18px",
             transform: "rotate(90deg)",
             transformOrigin: "center center",
@@ -198,9 +182,10 @@ const Footer = () => {
           Free Reward 🏆
         </Button>
       </Box>
+
       <Dialog
         open={openRewardDialog}
-        onClose={handleCloseRewardDialog}
+        onClose={onCloseRewardDialog}
         maxWidth="xs"
         fullWidth={false}
       >
@@ -240,11 +225,12 @@ const Footer = () => {
           </div>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseRewardDialog} color="primary">
+          <Button onClick={onCloseRewardDialog} color="primary">
             Close
           </Button>
         </DialogActions>
       </Dialog>
+
       {showScrollButton && (
         <Fab
           onClick={scrollToTop}
