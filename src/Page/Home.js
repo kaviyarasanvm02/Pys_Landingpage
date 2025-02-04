@@ -24,7 +24,7 @@ const Home = () => {
   return (
     <div>
       {/* Header */}
-      <NavBar />
+      {/* <NavBar /> */}
 
       <Box
         sx={{

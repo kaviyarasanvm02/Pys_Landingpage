@@ -78,7 +78,7 @@ const Venue = () => {
 
   return (
     <>
-      <NavBar />
+      {/* <NavBar /> */}
       <Box
         sx={{
           position: "relative",

@@ -116,7 +116,7 @@ const SignIn = () => {
   return (
     <>
       {/* Navbar */}
-      <NavBar />
+      {/* <NavBar /> */}
 
       {/* Breadcrumb */}
       <motion.div
