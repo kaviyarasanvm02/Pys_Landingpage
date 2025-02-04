@@ -13,6 +13,7 @@ import {
   Button,
 } from "@mui/material";
 import { keyframes } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 import CallIcon from "@mui/icons-material/Call";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -24,7 +25,7 @@ import pysLogo from "../assests/logo.png";
 import qrlogo from "../assests/work/qr.png";
 import andlogo from "../assests/qr (3).png";
 import iphonelogo from "../assests/qr (2).png";
-
+import { useLocation } from "react-router-dom";
 const blinkingBackground = keyframes`
   0% { background-color: #1db9aa; }
   50% { background-color: #261289; }
@@ -34,12 +35,18 @@ const blinkingBackground = keyframes`
 const Footer = ({ openRewardDialog, onOpenRewardDialog, onCloseRewardDialog }) => {
   const currentYear = new Date().getFullYear();
   const [showScrollButton, setShowScrollButton] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
     const handleScroll = () => {
       setShowScrollButton(window.scrollY > 100);
     };
@@ -54,7 +61,7 @@ const Footer = ({ openRewardDialog, onOpenRewardDialog, onCloseRewardDialog }) =
         <Grid container spacing={4} alignItems="flex-start">
           <Grid item xs={12} md={4} textAlign="center">
             <Box
-              onClick={scrollToTop}
+             onClick={() => navigate("/")}
               color="primary"
               component="img"
               src={pysLogo}
@@ -147,7 +154,7 @@ const Footer = ({ openRewardDialog, onOpenRewardDialog, onCloseRewardDialog }) =
         sx={{
           position: "fixed",
           right: -40,
-          top: "70%",
+          top: {xs: "80%", md : "75%"},
           transform: "translateY(-50%)",
           display: "flex",
           flexDirection: "column",
