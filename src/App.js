@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
 import Home from "./Page/Home";
 import About from "./Page/about";
 import Contact from "./Page/Contact";
@@ -12,8 +12,11 @@ import VenueDetails from "./Page/VenueDetails";
 import { useState } from "react";
 import NavBar from "./Component/NavBar";
 import BlogDetails from "./Page/BlogDetails";
+import ComingSoon from "./Component/ComingSoon";
+
 function App() {
   const [openRewardDialog, setOpenRewardDialog] = useState(false);
+  const location = useLocation();
 
   const handleOpenRewardDialog = () => {
     setOpenRewardDialog(true);
@@ -23,9 +26,12 @@ function App() {
     setOpenRewardDialog(false);
   };
 
+  // Hide Navbar and Footer if the path is "/comingsoon"
+  const hideNavAndFooter = location.pathname === "/comingsoon";
+
   return (
-    <Router>
-      <NavBar />
+    <>
+      {!hideNavAndFooter && <NavBar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/venue" element={<Venue />} />
@@ -35,17 +41,29 @@ function App() {
         />
         <Route path="/about" element={<About />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/blog-details/:id" element={<BlogDetails />}/>
+        <Route path="/blog-details/:id" element={<BlogDetails />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/comingsoon" element={<ComingSoon />} />
       </Routes>
-      <Footer
-        openRewardDialog={openRewardDialog}
-        onOpenRewardDialog={handleOpenRewardDialog}
-        onCloseRewardDialog={handleCloseRewardDialog}
-      />
+      {!hideNavAndFooter && (
+        <Footer
+          openRewardDialog={openRewardDialog}
+          onOpenRewardDialog={handleOpenRewardDialog}
+          onCloseRewardDialog={handleCloseRewardDialog}
+          isHidden={location.pathname === "/signin"}
+        />
+      )}
+    </>
+  );
+}
+
+function Root() {
+  return (
+    <Router>
+      <App />
     </Router>
   );
 }
 
-export default App;
+export default Root;

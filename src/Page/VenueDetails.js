@@ -23,10 +23,9 @@ import {
   Comment,
   Flag,
   Favorite,
-  Newspaper,
+
 } from "@mui/icons-material";
 import { WhatsApp, Facebook, X } from "@mui/icons-material";
-import NavBar from "../Component/NavBar";
 import BgImg from "../assests/video-bg.png";
 import check from "../assests/featured/check.png";
 import avatar from "../assests/profiles/avatar-01.jpg";

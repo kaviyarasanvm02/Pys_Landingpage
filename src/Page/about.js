@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import mobileView from "../assests/3333.png";
 import BgImg from "../assests/video-bg.png";
-import NavBar from "../Component/NavBar";
+
 
 const About = () => {
   const theme = useTheme();

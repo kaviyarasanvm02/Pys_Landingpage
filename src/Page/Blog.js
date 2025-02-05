@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Grid,
   Typography,
-  Breadcrumbs,
   Link,
   Box,
   Card,
@@ -13,6 +12,7 @@ import {
   Paper,
   List,
   ListItem,
+  ListItemIcon,
 } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -21,204 +21,72 @@ import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import BgImg from "../assests/video-bg.png";
 import { motion } from "framer-motion";
-import NavBar from "../Component/NavBar";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import Articleimg from "../assests/blog/article-1.jpg";
 import shapesRound from "../assests/shapes-round.png";
 import PostImage from "../assests/blog/blog-1.jpg";
 import PostImage4 from "../assests/blog/blog-4.jpg";
+import { instance } from "../controller/common";
+import axios from "axios";
 
 const Blog = () => {
-const navigate = useNavigate()
-  const blogPosts = [
-    {
-      id: 1,
-      title: "The Best Spa Saloons for your relaxations?",
-      date: "October 6, 2024",
-      description:
-        "Dimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.",
-      imgSrc: PostImage,
-      link: "blog-details.html",
-    },
-    {
-      id: 2,
-      title: "The Best Spa Saloons for your relaxations?",
-      date: "October 6, 2024",
-      description:
-        "Dimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.",
-      imgSrc: PostImage4,
-      link: "blog-details.html",
-    },
-    {
-      id: 3,
-      title: "The Best Spa Saloons for your relaxations?",
-      date: "October 6, 2024",
-      description:
-        "Dimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.",
-      imgSrc: PostImage,
-      link: "blog-details.html",
-    },
-    {
-      id: 4,
-      title: "The Best Spa Saloons for your relaxations?",
-      date: "October 6, 2024",
-      description:
-        "Dimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.",
-      imgSrc: PostImage,
-      link: "blog-details.html",
-    },
-    {
-      id: 5,
-      title: "The Best Spa Saloons for your relaxations?",
-      date: "October 6, 2024",
-      description:
-        "Dimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.",
-      image: PostImage,
-      link: "blog-details.html",
-    },
-    {
-      id: 6,
-      title: "The Best Spa Saloons for your relaxations?",
-      date: "October 6, 2024",
-      description:
-        "Dimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry’s standard dummy text ever since the 1500s.",
-      imgSrc: PostImage,
-      link: "blog-details.html",
-    },
-  ];
+  const navigate = useNavigate();
+  const [blogData, setBlogData] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
+   const [blogImages, setBlogImages] = useState({});
 
-  const categories = [
-    "Cricket",
-    "Fitness",
-    "Material Arts",
-    "Yoga",
-    "Dance",
-    "Badminton",
-  ];
-  const tags = [
-    "Travelling",
-    "Art",
-    "Vacation",
-    "Tourism",
-    "Culture",
-    "Lifestyle",
-    "Art",
-    "vacation",
-    "Tourism ",
-    "Culture",
-  ];
-  const articles = [
-    {
-      id: 1,
-      title: "Great Business Tips in 2024",
-      date: "October 6, 2024",
-      link: "blog-details.html",
-      image: Articleimg,
-    },
-    {
-      id: 2,
-      title: "Exciting News About Fashion",
-      date: "October 9, 2024",
-      link: "blog-details.html",
-      image: Articleimg,
-    },
-    {
-      id: 3,
-      title: "8 Amazing Tricks About Business",
-      date: "October 10, 2024",
-      link: "blog-details.html",
-      image: Articleimg,
-    },
-  ];
+  const getBlogData = async () => {
+    try {
+      const response = await instance.get(`/api/service/rest/blog/getBlog`);
+      setBlogData(response.data);
 
-  const handleNavigate = (blogId)=> {
-    navigate(`/blog-details/${blogId}`)
-  }
+      const categorySet = new Set(
+        response.data.map((post) => post.blogCategory)
+      );
+      setCategories([...categorySet]);
+
+      const allTags = response.data.flatMap(
+        (post) => post.tags?.split(",") || []
+      );
+      const uniqueTags = [...new Set(allTags)];
+      setTags(uniqueTags);
+
+      response.data.forEach((post) => {
+        getblogImageData(post.id);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getblogImageData = async (blogId) => {
+    try {
+      const response = await axios.get(
+        `/api/service/rest/photos/getBlogImage?blogId=${blogId}`,
+        { responseType: "blob" }
+      );
+      const imageUrl = URL.createObjectURL(response.data);
+      setBlogImages((prevImages) => ({ ...prevImages, [blogId]: imageUrl }));
+    } catch (error) {
+      console.error(`Error fetching image for blog ${blogId}:`, error);
+    }
+  };
+
+  useEffect(() => {
+    getBlogData();
+  }, []);
+
+  useEffect(() => {
+    getblogImageData();
+  })
+
+  const handleNavigate = (blogId) => {
+    navigate(`/blog-details/${blogId}`);
+  };
 
   return (
     <div>
-      {/* <NavBar /> */}
-      {/* <Box
-        sx={{
-          zIndex: 1,
-          backgroundColor: "#111018",
-          paddingTop: { xs: 5, md: 15 },
-        }}
-      >
-        <Container maxWidth="xl" sx={{ position: "relative", zIndex: 3 }}>
-          <Box
-            sx={{
-              position: "absolute",
-              top: { xs: "5%", md: "-60%" },
-              right: { xs: "10%", md: "65%" },
-              transform: {
-                xs: "translateX(0px)",
-                md: "translateX(400px)",
-              },
-              zIndex: 3,
-              transitionTimingFunction: "ease-out",
-              animation: "drive 2s forwards",
-              width: { xs: "200px", md: "400px" },
-            }}
-          >
-            <img src={shapesRound} alt="Decoration" style={{ width: "100%" }} />
-          </Box>
-          <Box
-            sx={{
-              position: "absolute",
-              top: { xs: "5%", md: "0%" },
-              right: { xs: "10%", md: "90%" },
-              transform: {
-                xs: "translateX(0px)",
-                md: "translateX(400px)",
-              },
-              zIndex: 3,
-              transitionTimingFunction: "ease-out",
-              animation: "drive 2s forwards",
-              width: { xs: "200px", md: "400px" },
-            }}
-          >
-            <img src={shapesRound} alt="Decoration" style={{ width: "100%" }} />
-          </Box>
-          <Grid
-            container
-            justifyContent="center"
-            textAlign="center"
-            sx={{ paddingBottom: { xs: 5, md: 15 } }}
-          >
-            <Grid item xs={12}>
-              <Typography
-                variant="h4"
-                fontWeight="bold"
-                gutterBottom
-                sx={{ color: "#fff" }}
-              >
-                Blogs
-              </Typography>
-              <Breadcrumbs
-                aria-label="breadcrumb"
-                separator="/"
-                sx={{
-                  color: "#fff",
-                  display: { xs: "none", md: "flex" },
-                  justifyContent: "center",
-                }}
-              >
-                <Link
-                  component={NavLink}
-                  to="/"
-                  underline="hover"
-                  color="inherit"
-                >
-                  Home
-                </Link>
-                <Typography color="textPrimary" sx={{ color: "#fff" }}>
-                  Blog
-                </Typography>
-              </Breadcrumbs>
-            </Grid>
-          </Grid>
-        </Container>
-      </Box> */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -242,7 +110,7 @@ const navigate = useNavigate()
           <Typography variant="h4" fontWeight={700}>
             Blog
           </Typography>
-          <Typography variant="body2">
+          <Typography variant="body2" sx={{mt:2}}>
             <Link href="/" underline="hover" color="inherit">
               Home
             </Link>{" "}
@@ -250,7 +118,8 @@ const navigate = useNavigate()
           </Typography>
         </Box>
       </motion.div>
-      <Container maxWidth='lx'
+      <Container
+        maxWidth="lx"
         sx={{
           paddingBottom: { xs: 2, md: 7 },
           position: "relative",
@@ -260,14 +129,14 @@ const navigate = useNavigate()
           // backgroundSize: "cover",
           backgroundPosition: "center",
           // minHeight: "30vh",
-          backgroundRepeat: "repeat-y"
+          backgroundRepeat: "repeat-y",
         }}
       >
         <Grid container spacing={4}>
           <Grid xs={12} sm={1}></Grid>
           <Grid item xs={12} md={7}>
             <Grid container spacing={4}>
-              {blogPosts.map((post, index) => (
+              {blogData.map((post, index) => (
                 <Grid item xs={12} sm={6} key={index}>
                   <Card
                     sx={{
@@ -283,7 +152,6 @@ const navigate = useNavigate()
                       overflow: "hidden",
                     }}
                   >
-                    {/* Container for the image */}
                     <Box
                       sx={{
                         position: "relative",
@@ -294,8 +162,8 @@ const navigate = useNavigate()
                       <CardMedia
                         component="img"
                         height="286"
-                        image={PostImage}
-                        alt="Post Image"
+                        image={blogImages[post.id] || PostImage}
+                        alt={post.title}
                         sx={{
                           cursor: "pointer",
                           transition: "transform 0.9s ease",
@@ -326,17 +194,19 @@ const navigate = useNavigate()
                         variant="h6"
                         gutterBottom
                         sx={{
-                          color: "#1009c3",
+                          color: "#fff",
                           fontFamily: "Poppins, sans-serif",
                           transition: "color 0.3s ease",
-                          "&:hover": { color: "white" },
+                          "&:hover": { textDecoration: "underline" },
                         }}
                       >
                         <a
                           href={post.link}
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
-                          {post.title}
+                          {post.title.length > 25
+                            ? post.title.slice(0, 25) + "..."
+                            : post.title}
                         </a>
                       </Typography>
 
@@ -346,22 +216,32 @@ const navigate = useNavigate()
                         fontWeight={"300"}
                         fontFamily={"Poppins, sans-serif"}
                       >
-                        {post.description}
+                        {post.description.length > 20
+                          ? post.description.slice(0, 20) + "..."
+                          : post.description}
                       </Typography>
                       <Button
                         variant="text"
                         sx={{
                           mt: 2,
                           color: "#fff",
-                          fontWeight: "300",
+                          fontWeight: "400",
                           fontFamily: "Poppins, sans-serif",
                           cursor: "pointer",
+                          textTransform: "capitalize",
                         }}
                         // href={post.link}
                         onClick={() => handleNavigate(post.id)}
                       >
                         View Details
-                        <ArrowForwardIcon sx={{marginLeft: 1, marginTop: "5px", fontSize: 20, marginBottom: 0.5 }} />
+                        <ArrowForwardIcon
+                          sx={{
+                            marginLeft: 1,
+                            marginTop: "5px",
+                            fontSize: 20,
+                            marginBottom: 0.5,
+                          }}
+                        />
                       </Button>
                     </CardContent>
                   </Card>
@@ -393,13 +273,25 @@ const navigate = useNavigate()
                   variant="h6"
                   gutterBottom
                 >
-                  <BusinessCenterIcon sx={{ color: "blue" }} /> Categories
+                  <BusinessCenterIcon sx={{ color: "blue", marginRight: 1 }} />{" "}
+                  Categories
                 </Typography>
                 <List>
                   {categories.map((category, index) => (
-                    <ListItem key={index} sx={{ padding: 0 }}>
-                      <Button
-                        variant="text"
+                    <ListItem
+                      key={index}
+                      sx={{
+                        padding: "5px 0",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <ListItemIcon sx={{ minWidth: "unset", marginRight: 1 }}>
+                        <FiberManualRecordIcon
+                          sx={{ fontSize: 10, color: "white" }}
+                        />
+                      </ListItemIcon>
+                      <Typography
                         sx={{
                           color: "white",
                           fontFamily: "Poppins, sans-serif",
@@ -407,7 +299,7 @@ const navigate = useNavigate()
                         }}
                       >
                         {category}
-                      </Button>
+                      </Typography>
                     </ListItem>
                   ))}
                 </List>
@@ -420,36 +312,52 @@ const navigate = useNavigate()
                   backgroundColor: "#211d2e",
                   boxShadow:
                     "4px 6px 20px rgba(255, 255, 255, 0.5), -2px -2px 10px rgba(255, 255, 255, 0.3)",
-                  animation: "flash-shadow 1s infinite",
+                  borderRadius: "12px",
                 }}
               >
+                {/* Tags Heading */}
                 <Typography
-                  sx={{ color: "#fff", borderBottom: "1px solid white" }}
+                  sx={{
+                    color: "#fff",
+                    borderBottom: "1px solid white",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    fontFamily: "Poppins, sans-serif",
+                  }}
                   variant="h6"
                   gutterBottom
                 >
-                  <LocalOfferOutlinedIcon
-                    sx={{ width: "20px", height: "20px" }}
-                  />{" "}
-                  Tags
+                  <LocalOfferOutlinedIcon sx={{ width: 20, height: 20,color: "blue" }} /> Tags
                 </Typography>
+                {/* Tag List */}
                 <Box
                   sx={{
-                    display: "grid",
-                    gridTemplateColumns: {xs:"repeat(3, 1fr)", md: "repeat(2, 1fr)", lg: "repeat(3, 1fr)"},
-                    gap: 1,
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: 1.5,
+                    mt: 4,
                   }}
                 >
                   {tags.map((tag, index) => (
                     <Button
                       key={index}
-                      variant="contained"
+                      variant="outlined"
                       sx={{
                         fontFamily: "Poppins, sans-serif",
-                        fontWeight: "300",
-                        backgroundColor: "white",
-                        color: "black",
-                        "&:hover": { backgroundColor: "#ddd" },
+                        fontWeight: "400",
+                        fontSize: "14px",
+                        textTransform: "capitalize",
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        color: "white",
+                        border: "1px solid rgba(255, 255, 255, 0.5)",
+                        borderRadius: "20px",
+                        padding: "6px 12px",
+                        transition: "all 0.3s ease",
+                        "&:hover": {
+                          backgroundColor: "rgba(255, 255, 255, 0.2)",
+                          borderColor: "white",
+                        },
                       }}
                       size="small"
                     >
@@ -459,7 +367,7 @@ const navigate = useNavigate()
                 </Box>
               </Paper>
 
-              <Paper
+              {/* <Paper
                 sx={{
                   padding: 2,
                   backgroundColor: "#211d2e",
@@ -479,7 +387,7 @@ const navigate = useNavigate()
                 >
                   Articles
                 </Typography>
-                {articles.map((article, index) => (
+                {blogData.map((article, index) => (
                   <Box
                     key={index}
                     sx={{
@@ -535,7 +443,7 @@ const navigate = useNavigate()
                     </Box>
                   </Box>
                 ))}
-              </Paper>
+              </Paper> */}
             </Box>
           </Grid>
         </Grid>

@@ -15,8 +15,7 @@ import {
   Favorite,
   Visibility,
 } from "@mui/icons-material";
-import { useLocation, useNavigate } from "react-router-dom";
-import NavBar from "../Component/NavBar";
+import { useLocation, } from "react-router-dom";
 import BgImg from "../assests/video-bg.png";
 import openingSoonImg from "../assests/list/listgrid-1.png";
 import avatar from "../assests/profiles/avatar-01.jpg";
@@ -66,7 +65,7 @@ const Venue = () => {
   const queryParams = new URLSearchParams(location.search);
   const category = queryParams.get("category") || "all";
   const [favorites, setFavorites] = useState({});
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const toggleFavorite = (id) => {
     setFavorites((prev) => ({
@@ -75,9 +74,9 @@ const Venue = () => {
     }));
   };
 
-  const handleCardClick = (id) => {
-    navigate(`/venue-details/${id}`);
-  };
+  // const handleCardClick = (id) => {
+  //   navigate(`/venue-details/${id}`);
+  // };
 
   return (
     <>
@@ -107,10 +106,10 @@ const Venue = () => {
     variant="body2"
     sx={{
       position: "absolute",
-      bottom: 40, // Moves breadcrumbs lower
+      bottom: 40, 
       left: "50%",
       transform: "translateX(-50%)",
-      zIndex: 2, // Ensures visibility over background
+      zIndex: 2, 
     }}
   >
     <Link href="/" underline="hover" color="inherit">
@@ -142,7 +141,7 @@ const Venue = () => {
                   borderRadius: "20px",
                   cursor: "pointer",
                 }}
-                onClick={() => handleCardClick(venue.id)}
+                // onClick={() => handleCardClick(venue.id)}
               >
                 <Box
                   sx={{
