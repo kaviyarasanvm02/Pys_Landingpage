@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Box, Grid, Typography, Button, Container } from "@mui/material";
 import Aos from "aos";
+import { useNavigate } from "react-router-dom";
 import "aos/dist/aos.css"; // Import AOS styles
 import chennai from "../assests/locations/chennai.png";
 import Coiambatore from "../assests/locations/Coiambatore.png";
@@ -11,52 +12,64 @@ import pondicherry from "../assests/locations/pondicherry.png";
 
 const locations = [
   {
+    id: "chennai",
     name: "Chennai",
     ads: "500+ Ads Posted",
     img: chennai,
-    link: "listing-grid.html",
+    link: "/venue",
     status: "Available",
   },
   {
+    id: "coimbatore",
     name: "Coimbatore",
     ads: "Coming Soon",
     img: Coiambatore,
-    link: "error-500.html",
+    link: "/comingsoon",
     status: "Coming Soon",
   },
   {
+    id: "madurai",
     name: "Madurai",
     ads: "Coming Soon",
     img: Madurai,
-    link: "error-500.html",
+    link: "/comingsoon",
     status: "Coming Soon",
   },
   {
+    id: "tirunelveli",
     name: "Tirunelveli",
     ads: "Coming Soon",
     img: Tirunelveli,
-    link: "error-500.html",
+    link: "/comingsoon",
     status: "Coming Soon",
   },
   {
+    id: "tiruchirappalli",
     name: "Tiruchirappalli",
     ads: "Coming Soon",
     img: Trichy,
-    link: "error-500.html",
+    link: "comingsoon",
     status: "Coming Soon",
   },
   {
+    id: "puducherry",
     name: "Puducherry",
     ads: "Coming Soon",
     img: pondicherry,
-    link: "error-500.html",
+    link: "/comingsoon",
     status: "Coming Soon",
   },
 ];
 
 const Locations = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (link) => {
+    navigate(link);
+  };
+
   useEffect(() => {
-    Aos.init({ duration: 1000 }); // Initialize AOS with animation duration
+    Aos.init({ duration: 1000 });
   }, []);
 
   return (
@@ -86,30 +99,29 @@ const Locations = () => {
       </Box>
 
       <Box sx={{ px: 4 }}>
-        <Grid container spacing={3} sx={{justifyContent: "space-evenly"}}>
+        <Grid container spacing={3} sx={{ justifyContent: "space-evenly" }}>
           {locations.map((location, index) => (
             <Grid
               item
               xs={12}
               sm={6}
-              // md={4}
               lg={3.5}
               key={index}
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
-              <Grid container
+              <Grid
+                container
                 sx={{
                   display: "flex",
                   alignItems: "center",
-                  // background: "#fff",
                   borderRadius: "8px",
                   boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
                   overflow: "hidden",
                   border: "2px solid #fff",
                 }}
               >
-                <Grid item xs={4} sx={{ flexShrink: 0, padding: "12px 0px 7px 7px"}}>
+                <Grid item xs={4} sx={{ flexShrink: 0, padding: "12px 0px 7px 7px" }}>
                   <a href={location.link}>
                     <img
                       src={location.img}
@@ -118,14 +130,16 @@ const Locations = () => {
                         width: "100%",
                         height: "auto",
                         objectFit: "cover",
-                        borderRadius: "8px" 
+                        borderRadius: "8px",
                       }}
                     />
                   </a>
                 </Grid>
                 <Grid item xs={8} sx={{ p: 2 }}>
                   <Typography variant="h6" sx={{ mb: 1 }}>
-                    <Typography sx={{color: "#fff", fontWeight: "bold", fontSize: "20px", textAlign: "start"}}>{location.name}</Typography>
+                    <Typography sx={{ color: "#fff", fontWeight: "bold", fontSize: "20px", textAlign: "start" }}>
+                      {location.name}
+                    </Typography>
                   </Typography>
                   <Typography
                     variant="body2"
@@ -135,8 +149,8 @@ const Locations = () => {
                     {location.ads}
                   </Typography>
                   <Button
+                    onClick={() => handleNavigate(location.link)}
                     variant="contained"
-                    href={location.link}
                     sx={{
                       width: "100%",
                       textTransform: "capitalize",

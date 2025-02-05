@@ -32,7 +32,7 @@ const blinkingBackground = keyframes`
   100% { background-color: #1db9aa; }
 `;
 
-const Footer = ({ openRewardDialog, onOpenRewardDialog, onCloseRewardDialog }) => {
+const Footer = ({ openRewardDialog, onOpenRewardDialog, onCloseRewardDialog,isHidden  }) => {
   const currentYear = new Date().getFullYear();
   const [showScrollButton, setShowScrollButton] = useState(false);
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ const Footer = ({ openRewardDialog, onOpenRewardDialog, onCloseRewardDialog }) =
   }, []);
 
   return (
-    <Box component="footer" sx={{ backgroundColor: "#1a1a1a", py: 4 }}>
+    <Box component="footer" sx={{ backgroundColor: "#1a1a1a", py: 4, display: isHidden ? "none" : "block", }}>
       <Container>
         <Grid container spacing={4} alignItems="flex-start">
           <Grid item xs={12} md={4} textAlign="center">

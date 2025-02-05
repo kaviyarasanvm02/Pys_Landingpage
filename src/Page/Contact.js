@@ -11,7 +11,6 @@ import BgImg from "../assests/video-bg.png";
 import contact from "../assests/contact.png";
 import NewsletterSection from "./NewsletterSection";
 import { motion } from "framer-motion";
-import NavBar from "../Component/NavBar";
 const Contact = () => {
   return (
     <>

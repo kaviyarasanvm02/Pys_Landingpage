@@ -26,7 +26,7 @@ const PYSPartners = () => {
   ];
 
   useEffect(() => {
-    Aos.init({ duration: 1000 }); // Initialize AOS with a 1000ms animation duration
+    Aos.init({ duration: 1000 });
   }, []);
 
   return (
@@ -38,7 +38,6 @@ const PYSPartners = () => {
     >
       <Box
         sx={{
-          // background: "#f7f7f7",
           padding: "4rem 2rem",
           textAlign: "center",
           overflow: "hidden",
@@ -64,28 +63,43 @@ const PYSPartners = () => {
               <Box
                 key={index}
                 sx={{
-                  background: "#fff",
-                  padding: "0.8rem",
+                  background: "linear-gradient(135deg, #6C757D, #E9ECEF)", // Gradient background for a modern look
+                  padding: "1rem",
                   borderRadius: "8px",
-                  marginBottom: "1rem",
-                  boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                  marginBottom: "1.5rem",
+                  boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
+                  transition: "transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease", // Slow transition
+                  "&:hover": {
+                    transform: "translateY(-5px)",
+                    boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
+                    background: "linear-gradient(135deg, #007BFF, #6C757D)", // A smooth hover color transition
+                    animation: "hoverEffect 1s ease forwards", // Slow animation
+                  },
                 }}
                 data-aos="fade-right"
               >
-                <Typography variant="body1" className="poppins-light">
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontWeight: 500,
+                    color: "#333",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
+                  }}
+                  className="poppins-light"
+                >
                   {item}
                 </Typography>
               </Box>
             ))}
           </Grid>
 
-          {/* Center Image */}
+          {/* Center Image with rotating effect */}
           <Grid
             item
             xs={12}
             md={4}
             data-aos="zoom-in"
-            sx={{ display: { xs: "none", md: "block" } }}
+            sx={{ display: { xs: "block", md: "block" } }}
           >
             <Box
               sx={{
@@ -93,16 +107,21 @@ const PYSPartners = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 width: "100%",
+                position: "relative",
+                overflow: "hidden", // Ensure image doesn't overflow the box
+                borderRadius: "8px",
+                boxShadow: "0 8px 16px rgba(0,0,0,0.2)", // Adds a shadow around the image
+                perspective: "1500px", // Adding perspective to enable 3D rotation effect
               }}
             >
               <img
                 src={partner}
                 alt="Partner"
                 style={{
-                  // width: "100%",
-                  maxWidth: "100vh", // Adjust for bigger image
-                  height: "auto",
+                  maxWidth: "100%",
+                  height: "100%",
                 }}
+                className="partner-image"
               />
             </Box>
           </Grid>
@@ -110,44 +129,83 @@ const PYSPartners = () => {
           {/* Right Column */}
           <Grid item xs={12} md={4}>
             {rightItems.map((item, index) => (
-              <>
-                <Box
-                  key={index}
+              <Box
+                key={index}
+                sx={{
+                  background: "linear-gradient(135deg, #6C757D, #E9ECEF)", // Gradient background for a modern look
+                  padding: "1rem",
+                  borderRadius: "8px",
+                  marginBottom: "1.5rem",
+                  boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
+                  transition: "transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease", // Slow transition
+                  "&:hover": {
+                    transform: "translateY(-5px)",
+                    boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
+                    background: "linear-gradient(135deg, #007BFF, #6C757D)", // A smooth hover color transition
+                    animation: "hoverEffect 1s ease forwards", // Slow animation
+                  },
+                }}
+                data-aos="fade-left"
+              >
+                <Typography
+                  variant="body1"
                   sx={{
-                    background: "#fff",
-                    padding: "0.8rem",
-                    borderRadius: "8px",
-                    marginBottom: "1rem",
-                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                    display: { xs: "none", md: "block" },
+                    fontWeight: 500,
+                    color: "#333",
+                    fontSize: { xs: "1rem", md: "1.1rem" },
                   }}
-                  data-aos="fade-left"
+                  className="poppins-light"
                 >
-                  <Typography variant="body1" className="poppins-light">
-                    {item}
-                  </Typography>
-                </Box>
-                <Box
-                  key={index}
-                  sx={{
-                    background: "#fff",
-                    padding: "0.8rem",
-                    borderRadius: "8px",
-                    marginBottom: "1rem",
-                    boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
-                    display: { xs: "block", md: "none" },
-                  }}
-                  data-aos="fade-right"
-                >
-                  <Typography variant="body1" className="poppins-light">
-                    {item}
-                  </Typography>
-                </Box>
-              </>
+                  {item}
+                </Typography>
+              </Box>
             ))}
           </Grid>
         </Grid>
       </Box>
+
+      {/* Add Keyframe and Animation Styles Inline */}
+      <style>
+        {`
+          @keyframes floatAndRotate {
+            0% {
+              transform: translateY(0) rotateY(0deg) scale(1);
+            }
+            25% {
+              transform: translateY(-10px) rotateY(90deg) scale(1.05);
+            }
+            50% {
+              transform: translateY(0) rotateY(180deg) scale(1);
+            }
+            75% {
+              transform: translateY(-10px) rotateY(270deg) scale(1.05);
+            }
+            100% {
+              transform: translateY(0) rotateY(360deg) scale(1);
+            }
+          }
+
+          .partner-image {
+            animation: floatAndRotate 8s infinite ease-in-out;
+          }
+
+          /* Hover effect animation for list items with slow animation */
+          @keyframes hoverEffect {
+            0% {
+              transform: scale(1);
+              background: linear-gradient(135deg, #6C757D, #E9ECEF);
+            }
+            50% {
+              transform: scale(1.05);
+              background: linear-gradient(135deg, #007BFF, #6C757D);
+            }
+            100% {
+              transform: scale(1);
+              background: linear-gradient(135deg, #6C757D, #E9ECEF);
+            }
+          }
+        `}
+      </style>
     </Container>
   );
 };

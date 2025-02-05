@@ -120,7 +120,7 @@ const SignIn = () => {
           backgroundImage: `url(${BgImg})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          minHeight: "70vh",
+          minHeight: "100vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",

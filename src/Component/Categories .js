@@ -21,9 +21,9 @@ const categories = [
 ];
 
 function Categories() {
-
   const navigate = useNavigate();
   const slideRef = useRef(null);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -31,6 +31,9 @@ function Categories() {
     slidesToShow: 4,
     slidesToScroll: 4,
     arrows: false,
+    autoplay: true, 
+    autoplaySpeed: 2000, 
+    pauseOnHover: true, 
     customPaging: () => (
       <Box
         sx={{
@@ -63,7 +66,7 @@ function Categories() {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 4,
+          slidesToScroll: 2,
         },
       },
     ],
@@ -78,7 +81,6 @@ function Categories() {
   const handleCardClick = (category) => {
     navigate(`/venue?category=${category}`);
   };
-  
 
   return (
     <Box
@@ -88,7 +90,6 @@ function Categories() {
         margin: "auto",
         mt: 8,
         fontFamily: "Poppins, sans-serif",
-        // bgcolor: '#0a0a0a',
         pb: 8,
       }}
     >
@@ -120,13 +121,12 @@ function Categories() {
             <Button
               onClick={() => handleCardClick("all")}
               variant="outlined"
-              // href="/"
               sx={{
                 color: "#fff",
                 textTransform: "capitalize",
                 fontFamily: "Poppins, sans-serif",
                 border: "1px solid #fff",
-                fontWeight : 'bold',
+                fontWeight: 'bold',
                 '&:hover': {
                   border: "1px solid #fff",
                   bgcolor: 'rgba(255,255,255,0.1)',
@@ -160,10 +160,9 @@ function Categories() {
             {categories.map((category, index) => (
               <Box
                 key={index}
-                onClick={()=> handleCardClick(category.name)}
+                onClick={() => handleCardClick(category.name)}
               >
                 <Box
-                
                   sx={{
                     position: "relative",
                     borderRadius: "16px",
@@ -186,7 +185,6 @@ function Categories() {
                       transition: "transform 0.3s ease-in-out",
                     }}
                   />
-                  {/* Gradient overlay */}
                   <Box
                     sx={{
                       position: "absolute",

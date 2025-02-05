@@ -1,87 +1,74 @@
-import React, { useEffect } from "react";
-import { Container, Grid, Typography, Button, Box } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Container, Grid, Typography, Button, Box, Chip } from "@mui/material";
+import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import blog1 from "../assests/blog/blog-1.jpg";
-import blog2 from "../assests/blog/blog-2.jpg";
-import blog3 from "../assests/blog/blog-3.jpg";
+import axios from "axios";
+import { instance } from "../controller/common";
 
 const HomePageBlog = () => {
-  const navigate = useNavigate()
+  const [blogData, setBlogData] = useState([]);
+  const [blogImages, setBlogImages] = useState({});
 
-  const handleNavigate = (blogId)=> {
-    navigate(`/blog-details/${blogId}`)
-  }
+  const getBlogData = async () => {
+    try {
+      const response = await instance.get(`/api/service/rest/blog/getBlog`);
+      setBlogData(response.data);
+      response.data.forEach((blog) => getBlogImage(blog.id));
+    } catch (error) {
+      console.error("Error fetching blog data:", error);
+    }
+  };
+
+  const getBlogImage = async (blogId) => {
+    try {
+      const response = await axios.get(
+        `/api/service/rest/photos/getBlogImage?blogId=${blogId}`,
+        { responseType: "blob" }
+      );
+      const imageUrl = URL.createObjectURL(response.data);
+      setBlogImages((prevImages) => ({ ...prevImages, [blogId]: imageUrl }));
+    } catch (error) {
+      console.error(`Error fetching image for blog ${blogId}:`, error);
+    }
+  };
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-in-out",
-      once: true,
-    });
+    AOS.init({ duration: 1000, easing: "ease-in-out", once: true });
+    getBlogData();
   }, []);
-
-  const blogData = [
-    {
-      id: 1,
-      image: blog1,
-      category: ["Health", "Care"],
-      date: "October 4, 2023",
-      title: "The Best Spa Saloons for Your Relaxations?",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      link: "/blog-details",
-    },
-    {
-      id: 2,
-      image: blog2,
-      category: ["Health", "Care"],
-      date: "October 6, 2023",
-      title: "Three Powerful Tricks For Online Advertising",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      link: "/blog-details",
-    },
-    {
-      id: 3,
-      image: blog3,
-      category: ["Health", "Care"],
-      date: "October 10, 2023",
-      title: "Competitive Analysis for Entrepreneurs in 2024",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
-      link: "/blog-details",
-    },
-  ];
 
   return (
     <section className="blog-section">
       <Box sx={{ py: 6, position: "relative" }}>
         <Container maxWidth="xl">
-          <Grid container alignItems="center" justifyContent="space-around">
-            <Grid item xs={12} md={5} data-aos="fade-up">
+          <Grid container alignItems="center" justifyContent="space-between">
+            <Grid item xs={12} md={6} data-aos="fade-up">
               <Typography
                 variant="h2"
                 sx={{
                   fontSize: { xs: "1.8rem", md: "3rem" },
                   color: "#fff",
-                  fontWeight: "bold",
+                  fontWeight: "bold", 
+                  marginLeft : {xs : 4 ,md : 8}
                 }}
-                fontWeight="bold"
               >
                 Latest Blog
               </Typography>
-              <Typography sx={{ color: "azure" }}>
-                People are giving these goods for free so check them out.
+              <Typography sx={{ color: "azure",  marginLeft : {xs : 4 ,md : 8} }}>
+                People are giving these goods for free, so check them out.
               </Typography>
             </Grid>
-            <Grid item xs={12} md={5} textAlign="right" data-aos="fade-up">
+            <Grid item xs={12} md={6} textAlign="right" data-aos="fade-up">
               <Button
-                variant="outlined"
-                sx={{ color: "#fff", borderColor: "#fff" }}
+                variant="contained"
+                sx={{
+                  backgroundColor: "#6a6484",
+                  color: "#fff",
+                  "&:hover": { backgroundColor: "#56505e" },
+                }}
                 component={Link}
                 to="/blog"
               >
@@ -93,117 +80,126 @@ const HomePageBlog = () => {
       </Box>
 
       <Container maxWidth="xl">
-        <Grid container spacing={3} justifyContent={"center"}>
-          {blogData.map((blog, index) => (
-            <Grid
-              item
-              lg={3.6}
-              md={4}
-              sm={6}
-              xs={12}
-              key={blog.id}
-              data-aos="fade-up"
-              data-aos-delay={index * 200}
-            >
-              <Box
-                className="blog grid-blog"
-                sx={{
-                  border: "2px solid #fff",
-                  borderRadius: 2,
-                  transition: "all 2000ms cubic-bezier(0.19, 1, 0.22, 1) 0ms",
-                  transform: "translateZ(0)",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                    cursor: "pointer",
-                  },
-                }}
+        <Grid container spacing={3} justifyContent="center">
+          {blogData
+            .slice(0, 3) // ✅ SHOW ONLY 3 BLOGS ON DESKTOP
+            .map((blog, index) => (
+              <Grid
+                item
+                lg={4} // 3 cards in a row for large screens
+                md={6} // 2 cards in a row for medium screens
+                sm={6} // 2 cards in a row for small screens
+                xs={12} // 1 card per row for mobile
+                key={blog.id}
+                data-aos="fade-up"
+                data-aos-delay={index * 200}
               >
-                <Box className="blog-image">
-                  <Link to={blog.link}>
-                    <img
-                      className="img-fluid"
-                      src={blog.image}
-                      alt="Post Image"
-                      style={{
-                        width: "100%",
-                        transition:
-                          "all 2000ms cubic-bezier(0.19, 1, 0.22, 1) 0ms",
+                <Box
+                  sx={{
+                    borderRadius: 2,
+                    transition: "all 0.3s ease-in-out",
+                    "&:hover": { transform: "scale(1.05)", cursor: "pointer" },
+                    backgroundColor: "#151515",
+                    padding: 2,
+                  }}
+                >
+                  <Box className="blog-image">
+                    <Link to={`/blog-details/${blog.id}`}>
+                      <img
+                        src={blogImages[blog.id] || "placeholder-image-url"}
+                        alt="Blog Post"
+                        style={{
+                          width: "100%",
+                          height: "200px",
+                          objectFit: "cover",
+                          borderRadius: "5px",
+                        }}
+                      />
+                    </Link>
+                  </Box>
+                  <Box className="blog-content" sx={{ padding: 2 }}>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#6a6484",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
                       }}
-                    />
-                  </Link>
-                </Box>
-                <Box className="blog-content" sx={{ margin: 1.5 }}>
-                  <Grid container spacing={2}>
-                    <Grid item xs={2.1} sm={3.3} md={4} lg={3}>
-                      <Button
-                        variant="contained"
-                        size="small"
-                        sx={{ backgroundColor: "#ffffff", color: "black" }}
-                      >
-                        Health
-                      </Button>
-                    </Grid>
-                    <Grid item xs={2} sm={3} lg={2}>
-                      <Button
-                        variant="contained"
-                        size="small"
-                        sx={{ backgroundColor: "#ffffff", color: "black" }}
-                      >
-                        Care
-                      </Button>
-                    </Grid>
-                  </Grid>
-                  <Typography
-                    variant="body2"
-                    className="date-icon"
-                    sx={{ color: "#6a6484", mt: 1.5 }}
-                  >
-                    <CalendarMonthIcon
-                      sx={{ fontSize: 16, color: "#6a6484" }}
-                    />{" "}
-                    {blog.date}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    className="blog-title"
-                    sx={{
-                      marginTop: 2.5,
-                      color: "#0000ff",
-                      fontSize: "20px",
-                      fontWeight: "700",
-                      "&:hover": {
+                    >
+                      <CalendarMonthIcon sx={{ fontSize: 16 }} /> {blog.date}
+                    </Typography>
+                    <Box
+                      sx={{
+                        mt: 1,
+                        display: "flex",
+                        gap: 0.5,
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      {blog.tags?.split(",").map((tag, i) => (
+                        <Chip
+                          key={i}
+                          label={tag.trim()}
+                          sx={{
+                            backgroundColor: "#fff",
+                            color: "#000",
+                            fontWeight: "bold",
+                            fontSize: "0.75rem",
+                          }}
+                        />
+                      ))}
+                    </Box>
+                    <Typography
+                      variant="h6"
+                      sx={{
+                        mt: 2,
                         color: "#fff",
-                      },
-                    }}
-                  >
-                    {blog.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    className="blog-description"
-                    sx={{ color: "#fff", marginTop: 1 }}
-                  >
-                    {blog.description}
-                  </Typography>
-                  <Grid container sx={{ alignItems: "center", marginTop: 1 }}>
-                    <Grid item xs={3}>
-                      <Typography
-                        variant="body2"
-                        className="viewlink"
-                        sx={{ color: "#fff" }}
-                        onClick={() => handleNavigate(blog.id)}
-                      >
-                        View Details
-                      </Typography>
+                        fontWeight: "700",
+                        fontSize: "1.2rem",
+                        "&:hover": { textDecoration: "underline" },
+                      }}
+                    >
+                      {blog.title.length > 40
+                        ? blog.title.slice(0, 40) + "..."
+                        : blog.title}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#b3b3b3",
+                        mt: 1,
+                      }}
+                    >
+                      {blog.description.length > 60
+                        ? blog.description.slice(0, 60) + "..."
+                        : blog.description}
+                    </Typography>
+                    <Grid container alignItems="center" mt={2}>
+                      <Grid item>
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            color: "#fff",
+                            "&:hover": { textDecoration: "underline" },
+                            cursor: "pointer",
+                          }}
+                          component={Link}
+                          to={`/blog-details/${blog.id}`}
+                        >
+                          View Details
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <ArrowForwardIcon
+                          sx={{ color: "#fff", fontSize: 20, ml: 1 }}
+                        />
+                      </Grid>
                     </Grid>
-                    <Grid item xs={1}>
-                      <ArrowForwardIcon sx={{ color: "#fff", fontSize: 20 }} />
-                    </Grid>
-                  </Grid>
+                  </Box>
                 </Box>
-              </Box>
-            </Grid>
-          ))}
+              </Grid>
+            ))}
         </Grid>
       </Container>
     </section>

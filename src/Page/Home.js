@@ -1,10 +1,6 @@
 import React from "react";
 import {
-  AppBar,
-  Toolbar,
-  IconButton,
   Typography,
-  Button,
   Box,
   Container,
   Grid,
@@ -14,13 +10,16 @@ import Offer from "../Component/Offer";
 import Proposals from "../Component/Proposals";
 import PYSPartners from "../Component/PYSPartners";
 import Locations from "../Component/Locations";
-import NavBar from "../Component/NavBar";
 import Categories from "../Component/Categories ";
 import HomePageBlog from "../Component/HomePageBlog";
 import BgImg from "../assests/video-bg.png";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
+
+
+
   return (
     <div>
       {/* Header */}

@@ -65,8 +65,10 @@ const NavBar = () => {
             variant="h6"
             sx={{
               flexGrow: 1,
+              alignItems : "center",
               display: "flex",
               justifyContent: { xs: "flex-end", md: "flex-start" },
+              marginTop : "10px"
             }}
           >
             <Link to="/">
@@ -134,7 +136,7 @@ const NavBar = () => {
           </Box>
           <List>
             {[
-              { text: "Home", path: "/" },
+              { text: "Home", path: "/" },  
               { text: "Venue", path: "/venue" },
               { text: "About Us", path: "/about" },
               { text: "Blog", path: "/blog" },
@@ -146,6 +148,7 @@ const NavBar = () => {
                 key={text}
                 component={Link}
                 to={path}
+                onClick={toggleDrawer(false)}
                 sx={{
                   color: "#fff",
                 }}
