@@ -27,7 +27,6 @@ import shapesRound from "../assests/shapes-round.png";
 import PostImage from "../assests/blog/blog-1.jpg";
 import PostImage4 from "../assests/blog/blog-4.jpg";
 import { instance } from "../controller/common";
-import axios from "axios";
 
 const Blog = () => {
   const navigate = useNavigate();
@@ -62,7 +61,7 @@ const Blog = () => {
 
   const getblogImageData = async (blogId) => {
     try {
-      const response = await axios.get(
+      const response = await instance.get(
         `/api/service/rest/photos/getBlogImage?blogId=${blogId}`,
         { responseType: "blob" }
       );

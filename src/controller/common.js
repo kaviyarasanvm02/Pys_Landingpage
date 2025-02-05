@@ -19,26 +19,26 @@ export const instance = axios.create({
   baseURL: BaseUrl,
 });
 
-const cookie = new Cookies();
+// const cookie = new Cookies();
 
-instance.interceptors.response.use(
-  (res) => res,
-  (error) => {
-    const status = error.response;
-    switch (status.status) {
-      case 401:
-        cookie.remove('user');
-        cookie.remove('token');
-        setToken('');
-        window.location = '/sessionExpired';
-        throw error;
-      case 500:
-        throw error;
-      default:
-        throw error;
-    }
-  }
-);
+// instance.interceptors.response.use(
+//   (res) => res,
+//   (error) => {
+//     const status = error.response;
+//     switch (status.status) {
+//       case 401:
+//         cookie.remove('user');
+//         cookie.remove('token');
+//         setToken('');
+//         window.location = '/sessionExpired';
+//         throw error;
+//       case 500:
+//         throw error;
+//       default:
+//         throw error;
+//     }
+//   }
+// );
 
 export const setToken = (token, vendorId) => {
   instance.defaults.headers['x-auth-token'] = token;

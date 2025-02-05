@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Grid,
   Typography,
@@ -7,11 +7,80 @@ import {
   TextField,
   Button,
 } from "@mui/material";
+import swal from "sweetalert";
 import BgImg from "../assests/video-bg.png";
 import contact from "../assests/contact.png";
 import NewsletterSection from "./NewsletterSection";
 import { motion } from "framer-motion";
+import { instance } from "../controller/common";
 const Contact = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [organizationName, setOrganizationName] = useState("");
+  const [query, setQuery] = useState("");
+
+  const handleNameChange = (e) => {
+    // Remove leading space
+    const value = e.target.value.replace(/^\s+/g, "");
+    setName(value);
+  };
+
+  const handleEmailChange = (e) => {
+    // Validate email format using regular expression
+    const value = e.target.value;
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (regex.test(value) || value === "") {
+      setEmail(value);
+    }
+  };
+
+  const handleMobileChange = (e) => {
+    // Only allow numbers and exactly 10 digits
+    const value = e.target.value.replace(/[^0-9]/g, "");
+    if (value.length <= 10) {
+      setMobile(value);
+    }
+  };
+
+  const createEnroll = async () => {
+    if (name && email && mobile && organizationName && query) {
+      try {
+        const response = await instance.post(
+          `/service/rest/reports/createEnroll`,
+          {
+            name,
+            email,
+            mobile,
+            organizationName,
+            query,
+          }
+        );
+        if (response.status === 200) {
+          swal("Enroll has been Send!", "success");
+          setName("");
+          setEmail("");
+          setMobile("");
+          setOrganizationName("");
+          setQuery("");
+        }
+      } catch (e) {
+        swal({
+          title: `Something went wrong!`,
+          text: "Please check all the fields!",
+          icon: "error",
+          dangerMode: true,
+        });
+      }
+    } else {
+      swal({
+        title: `Something went wrong!`,
+        text: "Please check all the fields!",
+        icon: "error",
+        dangerMode: true,
+      });
+    }
+  };
   return (
     <>
       {/* <NavBar /> */}
@@ -108,83 +177,150 @@ const Contact = () => {
                     textAlign: { xs: "center", md: "left" },
                   }}
                 >
-                  <form>
-                    <TextField
+                  {/* <form> */}
+                  <TextField
+                    fullWidth
+                    label="Name"
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    onChange={handleNameChange}
+                    value={name}
+                    sx={{
+                      backgroundColor: "rgba(255, 255, 255, 0.05)",
+                      input: { color: "#fff" },
+                      label: { color: "#ddd" },
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": { borderColor: "#ddd" },
+                        "&:hover fieldset": { borderColor: "#fff" },
+                        "&.Mui-focused fieldset": { borderColor: "#fff" },
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "#ddd",
+                        "&.Mui-focused": { color: "#fff" },
+                      },
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    label="Email"
+                    type="email"
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    onChange={handleEmailChange}
+                    value={email}
+                    sx={{
+                      backgroundColor: "rgba(255, 255, 255, 0.05)",
+                      input: { color: "#fff" },
+                      label: { color: "#ddd" },
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": { borderColor: "#ddd" },
+                        "&:hover fieldset": { borderColor: "#fff" },
+                        "&.Mui-focused fieldset": { borderColor: "#fff" },
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "#ddd",
+                        "&.Mui-focused": { color: "#fff" },
+                      },
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    label="Mobile Number"
+                    type="text"
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    onChange={handleMobileChange}
+                    value={mobile}
+                    sx={{
+                      backgroundColor: "rgba(255, 255, 255, 0.05)",
+                      input: { color: "#fff" },
+                      label: { color: "#ddd" },
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": { borderColor: "#ddd" },
+                        "&:hover fieldset": { borderColor: "#fff" },
+                        "&.Mui-focused fieldset": { borderColor: "#fff" },
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "#ddd",
+                        "&.Mui-focused": { color: "#fff" },
+                      },
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    label="Shop Name"
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    onChange={(e) => setOrganizationName(e.target.value)}
+                    value={organizationName}
+                    sx={{
+                      backgroundColor: "rgba(255, 255, 255, 0.05)",
+                      input: { color: "#fff" },
+                      label: { color: "#ddd" },
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": { borderColor: "#ddd" },
+                        "&:hover fieldset": { borderColor: "#fff" },
+                        "&.Mui-focused fieldset": { borderColor: "#fff" },
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "#ddd",
+                        "&.Mui-focused": { color: "#fff" },
+                      },
+                    }}
+                  />
+                  <TextField
+                    fullWidth
+                    label="Enter Query"
+                    multiline
+                    rows={4}
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    onChange={(e) => setQuery(e.target.value)}
+                    value={query}
+                    sx={{
+                      backgroundColor: "rgba(255, 255, 255, 0.05)",
+                      input: { color: "#fff" },
+                      label: { color: "#ddd" },
+                      "& .MuiOutlinedInput-root": {
+                        "& fieldset": { borderColor: "#ddd" },
+                        "&:hover fieldset": { borderColor: "#fff" },
+                        "&.Mui-focused fieldset": { borderColor: "#fff" },
+                      },
+                      "& .MuiInputLabel-root": {
+                        color: "#ddd",
+                        "&.Mui-focused": { color: "#fff" },
+                      },
+                    }}
+                  />
+                  <Box mt={3}>
+                    <Button
+                      variant="contained"
+                      color="primary"
                       fullWidth
-                      label="Name"
-                      variant="outlined"
-                      margin="normal"
-                      required
+                      type="submit"
+                      onClick={createEnroll}
                       sx={{
-                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                        input: { color: "#fff" },
-                        label: { color: "#ddd" },
+                        mt: 3,
+                        mb: 3,
+                        bgcolor: "white",
+                        color: "black",
+                        "&:hover": {
+                          bgcolor: "rgba(255, 255, 255, 0.9)",
+                        },
+                        py: 1.5,
+                        textTransform: "none",
+                        fontSize: "1.1rem",
                       }}
-                    />
-                    <TextField
-                      fullWidth
-                      label="Email"
-                      type="email"
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      sx={{
-                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                        input: { color: "#fff" },
-                        label: { color: "#ddd" },
-                      }}
-                    />
-                    <TextField
-                      fullWidth
-                      label="Mobile Number"
-                      type="number"
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      sx={{
-                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                        input: { color: "#fff" },
-                        label: { color: "#ddd" },
-                      }}
-                    />
-                    <TextField
-                      fullWidth
-                      label="Shop Name"
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      sx={{
-                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                        input: { color: "#fff" },
-                        label: { color: "#ddd" },
-                      }}
-                    />
-                    <TextField
-                      fullWidth
-                      label="Write a Message"
-                      multiline
-                      rows={4}
-                      variant="outlined"
-                      margin="normal"
-                      required
-                      sx={{
-                        backgroundColor: "rgba(255, 255, 255, 0.05)",
-                        textarea: { color: "#fff" },
-                        label: { color: "#ddd" },
-                      }}
-                    />
-
-                    <Box mt={3}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        fullWidth
-                        type="submit"
-                      >
-                        Submit
-                      </Button>
-                    </Box>
-                  </form>
+                    >
+                      Submit
+                    </Button>
+                  </Box>
+                  {/* </form> */}
                 </Box>
               </motion.div>
             </Grid>

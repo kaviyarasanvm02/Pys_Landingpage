@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
-import { Box, Typography, Grid, Container } from "@mui/material";
+import { Box, Typography, Grid, Container, keyframes } from "@mui/material";
 import Aos from "aos";
 import "aos/dist/aos.css"; // Import AOS styles
 import partner from "../assests/Partner.png";
 
 const PYSPartners = () => {
+  const backgroundAnimation = keyframes`
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+`;
   const leftItems = [
     "User IOS/Android app",
     "User Website",
@@ -63,17 +68,32 @@ const PYSPartners = () => {
               <Box
                 key={index}
                 sx={{
-                  background: "linear-gradient(135deg, #6C757D, #E9ECEF)", // Gradient background for a modern look
+                  position: "relative",
+                  overflow: "hidden",
+                  background: "linear-gradient(135deg, #6C757D, #E9ECEF)",
                   padding: "1rem",
                   borderRadius: "8px",
                   marginBottom: "1.5rem",
                   boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
-                  transition: "transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease", // Slow transition
+                  transition:
+                    "transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease",
+                  "&::before": {
+                    content: '""',
+                    position: "absolute",
+                    inset: "0",
+                    background: "linear-gradient(135deg, #007BFF, #6C757D)",
+                    backgroundSize: "200% 200%",
+                    transform: "scaleX(0)",
+                    transformOrigin: "left",
+                    transition: "transform 0.4s ease-in-out",
+                    zIndex: "-1",
+                  },
                   "&:hover": {
                     transform: "translateY(-5px)",
                     boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
-                    background: "linear-gradient(135deg, #007BFF, #6C757D)", // A smooth hover color transition
-                    animation: "hoverEffect 1s ease forwards", // Slow animation
+                    "&::before": {
+                      transform: "scaleX(1)",
+                    },
                   },
                 }}
                 data-aos="fade-right"
@@ -85,7 +105,6 @@ const PYSPartners = () => {
                     color: "#333",
                     fontSize: { xs: "1rem", md: "1.1rem" },
                   }}
-                  className="poppins-light"
                 >
                   {item}
                 </Typography>
@@ -99,7 +118,7 @@ const PYSPartners = () => {
             xs={12}
             md={4}
             data-aos="zoom-in"
-            sx={{ display: { xs: "block", md: "block" } }}
+            sx={{ display: { xs: "none", md: "block" } }}
           >
             <Box
               sx={{
@@ -108,10 +127,10 @@ const PYSPartners = () => {
                 alignItems: "center",
                 width: "100%",
                 position: "relative",
-                overflow: "hidden", // Ensure image doesn't overflow the box
+                overflow: "hidden",
                 borderRadius: "8px",
-                boxShadow: "0 8px 16px rgba(0,0,0,0.2)", // Adds a shadow around the image
-                perspective: "1500px", // Adding perspective to enable 3D rotation effect
+                boxShadow: "0 8px 16px rgba(0,0,0,0.2)",
+                perspective: "1500px",
               }}
             >
               <img
@@ -119,9 +138,8 @@ const PYSPartners = () => {
                 alt="Partner"
                 style={{
                   maxWidth: "100%",
-                  height: "100%",
+                  height: "80vh",
                 }}
-                className="partner-image"
               />
             </Box>
           </Grid>
@@ -132,17 +150,18 @@ const PYSPartners = () => {
               <Box
                 key={index}
                 sx={{
-                  background: "linear-gradient(135deg, #6C757D, #E9ECEF)", // Gradient background for a modern look
+                  background: "linear-gradient(135deg, #6C757D, #E9ECEF)",
                   padding: "1rem",
                   borderRadius: "8px",
                   marginBottom: "1.5rem",
                   boxShadow: "0 6px 12px rgba(0,0,0,0.1)",
-                  transition: "transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease", // Slow transition
+                  transition:
+                    "transform 0.5s ease, box-shadow 0.5s ease, background-color 0.5s ease",
                   "&:hover": {
                     transform: "translateY(-5px)",
                     boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
-                    background: "linear-gradient(135deg, #007BFF, #6C757D)", // A smooth hover color transition
-                    animation: "hoverEffect 1s ease forwards", // Slow animation
+                    background: "linear-gradient(135deg, #007BFF, #6C757D)",
+                    animation: "hoverEffect 1s ease forwards",
                   },
                 }}
                 data-aos="fade-left"
@@ -154,7 +173,6 @@ const PYSPartners = () => {
                     color: "#333",
                     fontSize: { xs: "1rem", md: "1.1rem" },
                   }}
-                  className="poppins-light"
                 >
                   {item}
                 </Typography>
@@ -165,47 +183,6 @@ const PYSPartners = () => {
       </Box>
 
       {/* Add Keyframe and Animation Styles Inline */}
-      <style>
-        {`
-          @keyframes floatAndRotate {
-            0% {
-              transform: translateY(0) rotateY(0deg) scale(1);
-            }
-            25% {
-              transform: translateY(-10px) rotateY(90deg) scale(1.05);
-            }
-            50% {
-              transform: translateY(0) rotateY(180deg) scale(1);
-            }
-            75% {
-              transform: translateY(-10px) rotateY(270deg) scale(1.05);
-            }
-            100% {
-              transform: translateY(0) rotateY(360deg) scale(1);
-            }
-          }
-
-          .partner-image {
-            animation: floatAndRotate 8s infinite ease-in-out;
-          }
-
-          /* Hover effect animation for list items with slow animation */
-          @keyframes hoverEffect {
-            0% {
-              transform: scale(1);
-              background: linear-gradient(135deg, #6C757D, #E9ECEF);
-            }
-            50% {
-              transform: scale(1.05);
-              background: linear-gradient(135deg, #007BFF, #6C757D);
-            }
-            100% {
-              transform: scale(1);
-              background: linear-gradient(135deg, #6C757D, #E9ECEF);
-            }
-          }
-        `}
-      </style>
     </Container>
   );
 };
