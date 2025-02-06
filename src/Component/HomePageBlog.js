@@ -5,7 +5,6 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import axios from "axios";
 import { instance } from "../controller/common";
 
 const HomePageBlog = () => {
@@ -24,7 +23,7 @@ const HomePageBlog = () => {
 
   const getBlogImage = async (blogId) => {
     try {
-      const response = await axios.get(
+      const response = await instance.get(
         `/api/service/rest/photos/getBlogImage?blogId=${blogId}`,
         { responseType: "blob" }
       );
