@@ -15,11 +15,12 @@ import {
   Favorite,
   Visibility,
 } from "@mui/icons-material";
-import { useLocation, } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import BgImg from "../assests/video-bg.png";
 import openingSoonImg from "../assests/list/listgrid-1.png";
 import avatar from "../assests/profiles/avatar-01.jpg";
 import disc from "../assests/disc.svg";
+import { Helmet } from "react-helmet";
 
 const venues = [
   {
@@ -81,44 +82,72 @@ const Venue = () => {
   return (
     <>
       {/* <NavBar /> */}
+      <Helmet>
+        <title>
+          Best Venues for Sports & Events in Chennai | Pick Your Slot
+        </title>
+        <meta
+          name="description"
+          content="Find the best venues for sports, events, and activities in Chennai. Book top-rated venues instantly with Pick Your Slot!"
+        />
+        <meta
+          name="keywords"
+          content="venues in Chennai, sports venues, event venues, book venues online, Pick Your Slot, online booking"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:title"
+          content="Find & Book Top Venues in Chennai | Pick Your Slot"
+        />
+        <meta
+          property="og:description"
+          content="Looking for the best venues in Chennai? Explore and book top-rated sports and event venues with ease at Pick Your Slot!"
+        />
+        <meta
+          property="og:image"
+          content="https://pickyourslot.com/assets/logo.png"
+        />
+        <meta property="og:url" content="https://pickyourslot.com/venue" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://pickyourslot.com/venue" />
+      </Helmet>
+
       <Box
-  sx={{
-    position: "relative",
-    textAlign: "center",
-    backgroundImage: `url(${BgImg})`,
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    color: "white",
-    minHeight: "30vh",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 2,
-  }}
->
-  <Typography variant="h4" fontWeight={700} sx={{ zIndex: 2 }}>
-    {category === "all" ? "All Venues" : `Venues for ${category}`}
-  </Typography>
+        sx={{
+          position: "relative",
+          textAlign: "center",
+          backgroundImage: `url(${BgImg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          color: "white",
+          minHeight: "30vh",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 2,
+        }}
+      >
+        <Typography variant="h4" fontWeight={700} sx={{ zIndex: 2 }}>
+          {category === "all" ? "All Venues" : `Venues for ${category}`}
+        </Typography>
 
-
-  <Typography
-    variant="body2"
-    sx={{
-      position: "absolute",
-      bottom: 40, 
-      left: "50%",
-      transform: "translateX(-50%)",
-      zIndex: 2, 
-    }}
-  >
-    <Link href="/" underline="hover" color="inherit">
-      Home
-    </Link>{" "}
-    / Venues
-  </Typography>
-</Box>
-
+        <Typography
+          variant="body2"
+          sx={{
+            position: "absolute",
+            bottom: 40,
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 2,
+          }}
+        >
+          <Link href="/" underline="hover" color="inherit">
+            Home
+          </Link>{" "}
+          / Venues
+        </Typography>
+      </Box>
 
       <Box
         sx={{

@@ -201,7 +201,7 @@ const Footer = ({ openRewardDialog, onOpenRewardDialog, onCloseRewardDialog,isHi
           <img
             src={qrlogo}
             alt="QR Code"
-            style={{ width: "400px", height: "300px" }}
+            style={{ width: "400px", height: "300px" ,maxWidth : "100%"}}
           />
           <div
             className="popup icon"
