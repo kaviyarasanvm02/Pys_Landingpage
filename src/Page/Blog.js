@@ -27,13 +27,14 @@ import shapesRound from "../assests/shapes-round.png";
 import PostImage from "../assests/blog/blog-1.jpg";
 import PostImage4 from "../assests/blog/blog-4.jpg";
 import { instance } from "../controller/common";
+import { Helmet } from "react-helmet";
 
 const Blog = () => {
   const navigate = useNavigate();
   const [blogData, setBlogData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
-   const [blogImages, setBlogImages] = useState({});
+  const [blogImages, setBlogImages] = useState({});
 
   const getBlogData = async () => {
     try {
@@ -78,7 +79,7 @@ const Blog = () => {
 
   useEffect(() => {
     getblogImageData();
-  })
+  });
 
   const handleNavigate = (blogId) => {
     navigate(`/blog-details/${blogId}`);
@@ -86,6 +87,34 @@ const Blog = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Pick Your Slot Blogs - Tips & Guides for Online Booking</title>
+        <meta
+          name="description"
+          content="Stay updated with the latest tips, guides, and insights on sports, fitness, events, and online booking with Pick Your Slot Blog!"
+        />
+        <meta
+          name="keywords"
+          content="Pick Your Slot blog, sports news, fitness tips, event booking, online booking guides, sports blogs, Chennai events"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:title"
+          content="Read the Latest Sports, Fitness & Booking Tips - Pick Your Slot Blog"
+        />
+        <meta
+          property="og:description"
+          content="Explore expert insights on sports, fitness, event booking, and online reservations. Read the latest articles now!"
+        />
+        <meta
+          property="og:image"
+        content="https://pickyourslot.com/assets/logo.png"
+        />
+        <meta property="og:url" content="https://pickyourslot.com/blog" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://pickyourslot.com/blog" />
+      </Helmet>
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -109,7 +138,7 @@ const Blog = () => {
           <Typography variant="h4" fontWeight={700}>
             Blog
           </Typography>
-          <Typography variant="body2" sx={{mt:2}}>
+          <Typography variant="body2" sx={{ mt: 2 }}>
             <Link href="/" underline="hover" color="inherit">
               Home
             </Link>{" "}
@@ -327,7 +356,10 @@ const Blog = () => {
                   variant="h6"
                   gutterBottom
                 >
-                  <LocalOfferOutlinedIcon sx={{ width: 20, height: 20,color: "blue" }} /> Tags
+                  <LocalOfferOutlinedIcon
+                    sx={{ width: 20, height: 20, color: "blue" }}
+                  />{" "}
+                  Tags
                 </Typography>
                 {/* Tag List */}
                 <Box

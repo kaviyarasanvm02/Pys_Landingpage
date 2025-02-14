@@ -13,6 +13,7 @@ import contact from "../assests/contact.png";
 import NewsletterSection from "./NewsletterSection";
 import { motion } from "framer-motion";
 import { instance } from "../controller/common";
+import { Helmet } from "react-helmet";
 const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,13 +22,11 @@ const Contact = () => {
   const [query, setQuery] = useState("");
 
   const handleNameChange = (e) => {
-    // Remove leading space
     const value = e.target.value.replace(/^\s+/g, "");
     setName(value);
   };
 
   const handleEmailChange = (e) => {
-    // Validate email format using regular expression
     const value = e.target.value;
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (regex.test(value) || value === "") {
@@ -36,7 +35,6 @@ const Contact = () => {
   };
 
   const handleMobileChange = (e) => {
-    // Only allow numbers and exactly 10 digits
     const value = e.target.value.replace(/[^0-9]/g, "");
     if (value.length <= 10) {
       setMobile(value);
@@ -84,6 +82,34 @@ const Contact = () => {
   return (
     <>
       {/* <NavBar /> */}
+
+      <Helmet>
+        <title>Contact Us | Get Support & Inquiries - Pick Your Slot</title>
+        <meta
+          name="description"
+          content="Need help? Contact Pick Your Slot for customer support, inquiries, or business partnerships. Get in touch with us today!"
+        />
+        <meta
+          name="keywords"
+          content="Contact Pick Your Slot, customer support, help center, online booking support, inquiries, business partnerships, Chennai customer service"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:title"
+          content="Get in Touch with Pick Your Slot | Contact Us Today!"
+        />
+        <meta
+          property="og:description"
+          content="Have questions or need support? Contact Pick Your Slot for help with bookings, partnerships, or customer service inquiries!"
+        />
+        <meta
+          property="og:image"
+          content="https://pickyourslot.com/assets/logo.png"
+        />
+        <meta property="og:url" content="https://pickyourslot.com/contact" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://pickyourslot.com/contact" />
+      </Helmet>
 
       <Box
         sx={{

@@ -20,8 +20,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { styled } from "@mui/material/styles";
 import BgImg from "../assests/video-bg.png";
 import { motion } from "framer-motion";
-import NavBar from "../Component/NavBar";
-
+import { Helmet } from "react-helmet";
 // Custom styled TextField
 const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
@@ -115,6 +114,35 @@ const SignIn = () => {
   return (
     <>
       {/* Login/Forgot Password Form */}
+
+      <Helmet>
+        <title>Sign In to Pick Your Slot | Access Your Account</title>
+        <meta
+          name="description"
+          content="Sign in to Pick Your Slot to manage your bookings, access your profile, and enjoy seamless online reservations. Secure & easy login."
+        />
+        <meta
+          name="keywords"
+          content="Pick Your Slot sign in, login to Pick Your Slot, access your account, online booking login, user authentication, secure login, Chennai"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta
+          property="og:title"
+          content="Sign In to Pick Your Slot | Manage Your Bookings"
+        />
+        <meta
+          property="og:description"
+          content="Log in to Pick Your Slot to access your profile, manage bookings, and enjoy fast and secure online reservations."
+        />
+        <meta
+          property="og:image"
+         content="https://pickyourslot.com/assets/logo.png"
+        />
+        <meta property="og:url" content="https://pickyourslot.com/signIn" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://pickyourslot.com/signIn" />
+      </Helmet>
+
       <Box
         sx={{
           backgroundImage: `url(${BgImg})`,
@@ -138,7 +166,7 @@ const SignIn = () => {
               justifyContent: "center",
               // minHeight: "25vh",
               paddingTop: 8,
-              paddingBottom: 2
+              paddingBottom: 2,
             }}
           >
             <Typography variant="h4" fontWeight={700}>

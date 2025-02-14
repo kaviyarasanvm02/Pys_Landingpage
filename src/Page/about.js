@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import {
   Grid,
   Typography,
@@ -18,7 +19,27 @@ const About = () => {
   return (
     <>
       {/* <NavBar /> */}
-
+      <Helmet>
+        <title>About Pick Your Slot | Online Booking Platform in Chennai</title>
+        <meta
+          name="description"
+          content="Pick Your Slot is Chennai's top online booking platform for gyms, salons, sports, and more. Find & book services near you effortlessly!"
+        />
+        <meta
+          name="keywords"
+          content="Pick Your Slot, Online Booking, Chennai, Gym, Salon, Sports, Services, Appointment"
+        />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="About Pick Your Slot" />
+        <meta
+          property="og:description"
+          content="Revolutionizing online bookings in Chennai. Find, book, and manage your services effortlessly."
+        />
+        <meta property="og:image" content="https://pickyourslot.com/assests/logo.png" />
+        <meta property="og:url" content="https://pickyourslot.com/about" />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://pickyourslot.com/about" />
+      </Helmet>
       <Box
         sx={{
           py: 8,
@@ -29,7 +50,7 @@ const About = () => {
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
-          overflowX : "hidden"
+          overflowX: "hidden",
         }}
       >
         <Container maxWidth="lg">
@@ -54,7 +75,7 @@ const About = () => {
               xs={12}
               md={6}
               order={{ xs: 1, md: 2 }}
-              sx={{ width: "100%", display: "flex", justifyContent: "center" }} 
+              sx={{ width: "100%", display: "flex", justifyContent: "center" }}
             >
               <Box
                 sx={{
@@ -63,7 +84,7 @@ const About = () => {
                   borderRadius: "12px",
                   boxShadow: 3,
                   textAlign: "left",
-                  width: "90%", 
+                  width: "90%",
                   maxWidth: isMobile ? "100%" : "800px",
                   boxSizing: "border-box",
                 }}
@@ -174,7 +195,7 @@ const About = () => {
                         backgroundColor: "#211d2e",
                       },
                       boxSizing: "border-box",
-                      height : '100%'
+                      height: "100%",
                     }}
                   >
                     <Typography
